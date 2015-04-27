@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.mirkowski.websocketclient.ConnectionManager;
 import com.mirkowski.websocketclient.Message;
 
+import java.util.List;
+
 
 public class RoomGameActivity extends ActionBarActivity {
 
@@ -80,4 +82,46 @@ public class RoomGameActivity extends ActionBarActivity {
     public void sendMessage(View view) {
         connectionManager.sendMessage(new Message(Build.MANUFACTURER,userNeme.getText().toString(),"Message",textMessage.getText().toString()));
     }
+
+    ///po rozmowie
+    public void setPlayersList(List list_get){
+        spinner = (Spinner) findViewById(R.id.spinner);
+        List<String> list = list_get;
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        spinner.setAdapter(dataAdapter);
+
+    }
+
+    //Kamil zamienilem to tak jak napisalem w documencie na stronie
+    private String getSelectedPlayer(){
+        spinner = (Spinner) findViewById(R.id.spinner);
+        return String.valueOf(spinner.getSelectedItem());
+    }
+
+    public void invite(){
+        getSelectedPlayer();
+    }
+
+    public void setLabelText(String text){
+    }
+
+    public void setEnabled(Boolean flag){
+    }
+
+    public void startGame(){
+    }
+
+    public void addTextToMessageView(){
+    }
+
+    public void getMessageText(){
+    }
+
+    public void sendChatMessage(){
+    }
+
+
 }

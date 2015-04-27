@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< Updated upstream
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/mirkowski/websocketclient/ConnectionManager.java" charset="UTF-8" />
   </component>
 </project>
+=======
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/mirkowski/websocketclient/CommandIncomingExecutor.java" charset="windows-1250" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/mirkowski/websocketclient/CommandOutgoingExecutor.java" charset="windows-1250" />
+  </component>
+</project>
+
+>>>>>>> Stashed changes

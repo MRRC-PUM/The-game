@@ -1,11 +1,14 @@
 package com.example.bartek.shipswar;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.example.bartek.shipswar.logic.Controler;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -51,10 +54,21 @@ public class MainActivity extends ActionBarActivity {
 
     public void onClickButtonStatystyki(View view) {
         Intent intent = new Intent(this, StatisticsActivity.class);
+
         startActivity(intent);
     }
 
     public void onClickButtonWyjscie(View view) {
         System.exit(0);
     }
+
+    //po rozmowie
+    private void createControler(Activity owner){
+        //Controler controler = new Controler(owner);
+    }
+
+    //public Controler getControler(){
+   //
+     //   return ;
+    //}
 }

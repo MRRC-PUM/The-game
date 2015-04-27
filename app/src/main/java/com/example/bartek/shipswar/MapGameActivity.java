@@ -187,4 +187,23 @@ public class MapGameActivity extends ActionBarActivity {
 
     public void onClickButton66(View view) {
     }
+
+    //po rozmowie
+    public void setOwnerNameLabel(String NAME){
+    }
+
+    public void setOpponentNameLabel(String NAME){
+    }
+
+    public void setMode(String NAME){
+    }
+    //->
+    public void onClick(){
+    }
+
+    //public void display(Tab[][]) {
+    //}
+
+    public void changeView(){
+    }
 }
