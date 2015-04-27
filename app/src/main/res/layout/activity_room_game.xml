@@ -5,7 +5,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.bartek.shipswar.RoomGameActivity">
+    tools:context="com.example.bartek.shipswar.RoomGameActivity"
+    android:weightSum="1">
 
 
     <Spinner
@@ -46,4 +47,46 @@
         android:id="@+id/buttonRozpocznijGre"
         android:onClick="onClickButtonRozpocznijGre"
         />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="167dp"
+        android:id="@+id/scrollView"
+        android:layout_weight="0.40">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textMessageView" />
+    </ScrollView>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editMessage" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editUserName"
+            android:layout_weight="0.98" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wyślij"
+            android:id="@+id/send"
+            android:layout_gravity="right"
+            android:onClick="sendMessage"/>
+
+    </LinearLayout>
+
 </LinearLayout>

@@ -1,27 +1,43 @@
 package com.example.bartek.shipswar;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.mirkowski.websocketclient.ConnectionManager;
+import com.mirkowski.websocketclient.Message;
 
 
 public class RoomGameActivity extends ActionBarActivity {
 
+    TextView messageView;
+    EditText textMessage;
+    Spinner spinner;
+    EditText userNeme;
+    ConnectionManager connectionManager = new ConnectionManager();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_game);
-
+        messageView = (TextView) findViewById(R.id.textMessageView);
+        textMessage = (EditText) findViewById(R.id.editMessage);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        userNeme = (EditText) findViewById(R.id.editUserName);
+        connectionManager.setMessageView(messageView);
+        connectionManager.start();
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.players_test_names, android.R.layout.simple_spinner_item);
+                        R.array.players_test_names, android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
@@ -59,5 +75,9 @@ public class RoomGameActivity extends ActionBarActivity {
     }
 
     public void onClickButtonZapros(View view) {
+    }
+
+    public void sendMessage(View view) {
+        connectionManager.sendMessage(new Message(Build.MANUFACTURER,userNeme.getText().toString(),"Message",textMessage.getText().toString()));
     }
 }

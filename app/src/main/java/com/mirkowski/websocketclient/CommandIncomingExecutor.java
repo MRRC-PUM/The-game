@@ -16,6 +16,8 @@ public class CommandIncomingExecutor {
 
         if(transportUnit instanceof Message){
             tempMessageType = transportUnit.getMessageType();
+            tempMessage = transportUnit.getMessage();
+
             if(transportUnit.getSenderName().equals("System")){
               //obs³uga comend systemu
             }else{
@@ -23,21 +25,21 @@ public class CommandIncomingExecutor {
                          //ustaw powiadomienie zapytania o gre
                 }else if(tempMessageType.equals(Command.REPLY.toString())){
 
-                        if(tempMessageType.equals(ReplayParameter.YES.toString())){
+                        if(tempMessage.equals(ReplayParameter.YES.toString())){
                             //ustaw powiadomienie o zgodzie na gre
-                        }else if(tempMessageType.equals(ReplayParameter.NO.toString())){
+                        }else if(tempMessage.equals(ReplayParameter.NO.toString())){
                             //ustaw powiadomienie o braku zgody na gre
                         }
 
                 }else if(tempMessageType.equals(Command.INFO.toString())){
 
-                        if(tempMessageType.equals(InfoParameter.START.toString())){
+                        if(tempMessage.equals(InfoParameter.START.toString())){
                             //aktywuj button "rozpocznij gre"
-                        }else if(tempMessageType.equals(InfoParameter.ABORT.toString())){
+                        }else if(tempMessage.equals(InfoParameter.ABORT.toString())){
                             //wyswietl komunikat o tym ze przeciwnik przerwa³ gre i opuœæ okno Gry
-                        }else if(tempMessageType.equals(InfoParameter.WIN.toString())){
+                        }else if(tempMessage.equals(InfoParameter.WIN.toString())){
                             //wyswietl komunikat o tym ze wygra³eœ gre i opuœæ okno Gry
-                        }else if(tempMessageType.equals(InfoParameter.DEFEAT.toString())){
+                        }else if(tempMessage.equals(InfoParameter.DEFEAT.toString())){
                             //wyswietl komunikat o tym ze przegra³eœ gre i opuœæ okno Gry
                         }
 
