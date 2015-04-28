@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.mirkowski.websocketclient.ConnectionManager;
+import com.mirkowski.websocketclient.WebSocketConnector;
 import com.mirkowski.websocketclient.Message;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class RoomGameActivity extends ActionBarActivity {
     EditText textMessage;
     Spinner spinner;
     EditText userNeme;
-    ConnectionManager connectionManager = new ConnectionManager();
+    WebSocketConnector connectionManager = new WebSocketConnector();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +80,7 @@ public class RoomGameActivity extends ActionBarActivity {
     }
 
     public void sendMessage(View view) {
-        connectionManager.sendMessage(new Message(Build.MANUFACTURER,userNeme.getText().toString(),"Message",textMessage.getText().toString()));
+        connectionManager.send(new Message(Build.MANUFACTURER, userNeme.getText().toString(), "Message", textMessage.getText().toString()));
     }
 
     ///po rozmowie

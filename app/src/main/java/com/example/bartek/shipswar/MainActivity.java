@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.bartek.shipswar.logic.Controler;
+
 
 
 public class MainActivity extends ActionBarActivity {
