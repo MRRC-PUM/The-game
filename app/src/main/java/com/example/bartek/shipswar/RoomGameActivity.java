@@ -8,14 +8,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.mirkowski.management.ConnectionManager;
 import com.mirkowski.websocketclient.WebSocketConnector;
 import com.mirkowski.websocketclient.Message;
 
 import java.util.List;
+
+import de.tavendo.autobahn.WebSocketMessage;
 
 
 public class RoomGameActivity extends ActionBarActivity {
@@ -24,7 +29,15 @@ public class RoomGameActivity extends ActionBarActivity {
     EditText textMessage;
     Spinner spinner;
     EditText userNeme;
-    WebSocketConnector connectionManager = new WebSocketConnector();
+    Button buttonStartGame;
+
+// Szanowny kamilu jak cos dopisujesz swojego to przynajmniej w konstruktorach przekazuj to co sam wymyslilles by przekazywac
+    //dziekuje i pozdrawiam i nie polecam xD
+ConnectionManager connectionManagerWYBRAKOWANY;
+    String serverURI;
+    //i przekazalem je liniie nizej wybacz ale nei mialem jak tego zrobic inaczej bo nei chcialem ci bardziej modzic
+
+    WebSocketConnector connectionManager = new WebSocketConnector(connectionManagerWYBRAKOWANY, serverURI);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +46,14 @@ public class RoomGameActivity extends ActionBarActivity {
         textMessage = (EditText) findViewById(R.id.editMessage);
         spinner = (Spinner) findViewById(R.id.spinner);
         userNeme = (EditText) findViewById(R.id.editUserName);
-        connectionManager.setMessageView(messageView);
-        connectionManager.start();
-
+        buttonStartGame = (Button) findViewById(R.id.buttonRozpocznijGre);
+        buttonStartGame.setEnabled(true); //true musi byc dla testow moich :) potem sie ustawi false
+       //!!!!!!!!!!!!!!!!!!!!!!!!! connectionManager.setMessageView(messageView);
+        /*connectionManager.start();    /*<----KAMIL !!!!!!!!!!!!!!!! jak zakomentuje ta
+        linie to przechodzi do okna jak nie jest
+        zakomentowana to wykrzacza sie program,
+        pewnie kwestia ze nie sa inne rzeczy poustawiane
+        ale co test to ja poprostu komentuje narazie a to napisalem tak bys wiedzial.*/
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -106,18 +124,28 @@ public class RoomGameActivity extends ActionBarActivity {
     }
 
     public void setLabelText(String text){
+        TextView textView = (TextView) findViewById(R.id.textViewOtherPLayerWaiting);
+        textView.setText(text);
+
     }
 
     public void setEnabled(Boolean flag){
+        buttonStartGame.setEnabled(flag);
     }
 
     public void startGame(){
     }
 
-    public void addTextToMessageView(){
+    public void addTextToMessageView(String text){ //gdzie text to jest wiadomosc ktora odebralismy
+        TextView textMessageView = (TextView) findViewById(R.id.textMessageView);
+        String textInMessegeViev = textMessageView.getText().toString();
+        textInMessegeViev = textInMessegeViev + text;
+        textMessageView.setText(textInMessegeViev);
     }
 
-    public void getMessageText(){
+    public String getMessageText(){
+    EditText editText = (EditText) findViewById(R.id.editMessage);
+        return  editText.getText().toString();
     }
 
     public void sendChatMessage(){
