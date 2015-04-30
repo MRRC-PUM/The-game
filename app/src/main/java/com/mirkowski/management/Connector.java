@@ -7,7 +7,6 @@ import com.mirkowski.websocketclient.Message;
  */
 public interface Connector {
 
-   // konstrukto z ConnectionMenager
 
     public void start();
     public void stop();

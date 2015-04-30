@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <settings>
+        <username>Player</username>
+        <serveradress>192.168.1.100</serveradress>
+    </settings>
+</resources>

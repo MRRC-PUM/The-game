@@ -3,6 +3,8 @@ package com.mirkowski.websocketclient;
 import com.mirkowski.management.ConnectionManager;
 import com.mirkowski.management.Connector;
 
+
+
 import de.tavendo.autobahn.WebSocketConnection;
 import de.tavendo.autobahn.WebSocketException;
 import de.tavendo.autobahn.WebSocketHandler;
@@ -56,7 +58,11 @@ public class WebSocketConnector implements Connector{
     }
 
     public void send(Message message) {
-        mConnection.sendTextMessage(MessageEncoder.encode(message));
+        try {
+            mConnection.sendTextMessage(MessageEncoder.encode(message));
+        }catch (Exception e){
+            connectionManager.connectionLost("Connection error");
+        }
     }
 
     @Override
