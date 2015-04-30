@@ -141,6 +141,7 @@ public class GameFactory {
         if (ships[iterate].getOrientation()){
            for (int i = start.getY(); i<=end.getY(); i++){
                owner[start.getX()][i]=2;
+
                //narazie nei daje wstawiania odstepu poprostu z braku czasu
            }
         } else {
