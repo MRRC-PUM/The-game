@@ -3,11 +3,11 @@ package com.example.bartek.shipswar.logic;
 /**
  * Created by Bartek on 2015-04-20.
  */
-public class GameMaker {
+public class GameMakerOlderVersion {
     final int maxTablePoints = 6;
     private int[][] playerTab = new int[maxTablePoints][maxTablePoints];
 
-    public GameMaker() {
+    public GameMakerOlderVersion() {
         for (int i = 0; i < maxTablePoints; i++)
             for (int k = 0; k < maxTablePoints; k++) this.playerTab[i][k] = 0 ;
     }
