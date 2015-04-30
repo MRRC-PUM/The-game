@@ -7,6 +7,7 @@ public class Ship {
 
     private String type;
     private int points;
+    private boolean orientation; //0 hor 1 ver
     private int[][] wsp_s_e = new int[2][2];
 
     public Ship(String type, int points) {
@@ -36,5 +37,13 @@ public class Ship {
 
     public int getPoints() {
         return points;
+    }
+
+    public boolean getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(boolean orientation) {
+        this.orientation = orientation;
     }
 }
