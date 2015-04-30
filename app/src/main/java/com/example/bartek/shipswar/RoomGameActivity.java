@@ -48,12 +48,15 @@ ConnectionManager connectionManagerWYBRAKOWANY;
         userNeme = (EditText) findViewById(R.id.editUserName);
         buttonStartGame = (Button) findViewById(R.id.buttonRozpocznijGre);
         buttonStartGame.setEnabled(true); //true musi byc dla testow moich :) potem sie ustawi false
-       //!!!!!!!!!!!!!!!!!!!!!!!!! connectionManager.setMessageView(messageView);
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!! connectionManager.setMessageView(messageView);
         /*connectionManager.start();    /*<----KAMIL !!!!!!!!!!!!!!!! jak zakomentuje ta
         linie to przechodzi do okna jak nie jest
         zakomentowana to wykrzacza sie program,
         pewnie kwestia ze nie sa inne rzeczy poustawiane
         ale co test to ja poprostu komentuje narazie a to napisalem tak bys wiedzial.*/
+
+
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -119,6 +122,7 @@ ConnectionManager connectionManagerWYBRAKOWANY;
         return String.valueOf(spinner.getSelectedItem());
     }
 
+    //!!!!!!!!!!!!!!!!!!!!!! czy pasuje Ci
     public void invite(){
         getSelectedPlayer();
     }

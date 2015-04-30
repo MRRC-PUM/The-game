@@ -70,7 +70,7 @@ public class MapGameActivity extends ActionBarActivity {
                ImageView pole = (ImageView) findViewById(currentCell);
                if (tab[j][i]==0) pole.setBackgroundColor(0xFF0000); // to bedzie jak beda grafiki... pole.setImageBitmap(Bitmap bm);
                else if (tab[j][i]==1) pole.setBackgroundColor(0xFF0011);//gdy obok statku
-               if (tab[j][i]==2) pole.setBackgroundColor(0xFF00FF);//gdy statek
+               else if (tab[j][i]==2) pole.setBackgroundColor(0xFF00FF);//gdy statek
            }
 
     }
