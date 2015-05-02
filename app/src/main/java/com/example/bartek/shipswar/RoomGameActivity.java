@@ -24,7 +24,7 @@ public class RoomGameActivity extends ActionBarActivity {
     EditText textMessage;
     Spinner spinner;
     EditText userNeme;
-    WebSocketConnector connectionManager = new WebSocketConnector();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +33,7 @@ public class RoomGameActivity extends ActionBarActivity {
         textMessage = (EditText) findViewById(R.id.editMessage);
         spinner = (Spinner) findViewById(R.id.spinner);
         userNeme = (EditText) findViewById(R.id.editUserName);
-        connectionManager.setMessageView(messageView);
-        connectionManager.start();
+
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -80,7 +79,7 @@ public class RoomGameActivity extends ActionBarActivity {
     }
 
     public void sendMessage(View view) {
-        connectionManager.send(new Message(Build.MANUFACTURER, userNeme.getText().toString(), "Message", textMessage.getText().toString()));
+
     }
 
     ///po rozmowie

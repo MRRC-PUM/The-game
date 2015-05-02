@@ -22,19 +22,20 @@ public class Settings {
     private String userName = null;
     private String serverAdress = null;
 
-    private final File file = new File("res\\values\\settings.xml");
+    private final File file ;//= new File("res/values/settings.xml");
 
 
     public Settings(){
-        try {
-            readXMLFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            readXMLFile();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ParserConfigurationException e) {
+//            e.printStackTrace();
+//        } catch (SAXException e) {
+//            e.printStackTrace();
+//        }
+        file = null;
     }
     private void readXMLFile() throws IOException, ParserConfigurationException, SAXException {
 
@@ -122,5 +123,12 @@ public class Settings {
         } catch (TransformerException e) {
             e.printStackTrace();
         }
+    }
+
+    public void incrementWinCount(){
+
+    }
+    public void incrementDefeatCount(){
+
     }
 }

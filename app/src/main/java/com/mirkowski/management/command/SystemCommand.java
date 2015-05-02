@@ -5,9 +5,9 @@ package com.mirkowski.management.command;
  */
 public enum SystemCommand {
 
-    WrongDestinationAddress,UndefinedCommand,EndGame, // only to server
+    WrongDestinationAddress,UndefinedCommand,EndGame,LongTimeWaitingForPlayer,StartGameResponse, // only to server
     StartGame,Error,Win,Defeat, //only from Server
-    Echo,PlayersList,Registration,StartGameRequest,BusyGameResponse,StartGameResponse,NoStartGameResponse,ChatroomMessage,ChatMessage //to both side
+    Echo,PlayersList,Registration,StartGameRequest,BusyGameResponse,NoStartGameResponse,ChatroomMessage,ChatMessage //to both side
 
 
 

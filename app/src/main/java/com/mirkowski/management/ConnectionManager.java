@@ -31,6 +31,11 @@ public class ConnectionManager {
         return ownerName;
     }
 
+    public ArrayList<String> getPlayerList() {
+        if(playerList == null)getPlayersListfromServer("");
+        return playerList;
+    }
+
     public void onMessage(Message message){
 
         if(message.getSenderName().equals(SERVERNAME)){
@@ -39,7 +44,7 @@ public class ConnectionManager {
             gameCommandInterpretation(message);
         } else {
             if(message.getMessageType().equals(SystemCommand.ChatroomMessage.toString()) || message.getMessageType().equals(SystemCommand.ChatMessage.toString())){
-
+                controller.onChatMessage(message.getSenderName(),message.getMessage());
             } else {
                 connector.send(new Message(ownerName, SERVERNAME, SystemCommand.WrongDestinationAddress.toString(), message.getSenderName()));
             }
@@ -53,9 +58,11 @@ public class ConnectionManager {
     }
 
     public void connectionLost(String reason){
-
+        controller.viewInfo("Application ",reason);
     }
-
+    private void getPlayersListfromServer(String pattern){
+        sendMessage(new Message(ownerName,"System",SystemCommand.PlayersList.toString(),pattern));
+    }
     public void close(){
         connector.send(new Message(ownerName,SERVERNAME,SystemCommand.EndGame.toString(),controller.getOpponentName()));
     }
@@ -79,24 +86,32 @@ public class ConnectionManager {
     private void systemCommandInterpretation(Message message){
         if(message.getMessageType().equals(SystemCommand.Registration.toString())){
             ownerName = message.getMessage();
+            controller.setOwnerName(message.getMessage());
         } else if(message.getMessageType().equals(SystemCommand.StartGameRequest.toString())){
-
-        } else if(message.getMessageType().equals(SystemCommand.StartGameResponse.toString())){
-
+            controller.viewInfo(message.getSenderName(),"Player "+message.getMessage()+" invites you to the game");
         } else if(message.getMessageType().equals(SystemCommand.BusyGameResponse.toString())){
-
+            controller.viewInfo(message.getSenderName(),"Player "+message.getMessage()+" is busy ,try again later");
         } else if(message.getMessageType().equals(SystemCommand.NoStartGameResponse.toString())){
-
+            controller.viewInfo(message.getSenderName(),"Player "+message.getMessage()+" does not want to play with you");
         } else if(message.getMessageType().equals(SystemCommand.StartGame.toString())){
-
+            if(message.getMessage().equals(controller.getOpponentName())){
+                controller.viewInfo(message.getSenderName(),"Player "+message.getMessage()+" wants to play with you");
+                controller.enableGame();
+            } else {
+                connector.send(new Message(ownerName, SERVERNAME, SystemCommand.WrongDestinationAddress.toString(), message.getSenderName()));
+            }
         } else if(message.getMessageType().equals(SystemCommand.Win.toString())){
-
+                controller.endTheGame(SystemCommand.Win);
         } else if(message.getMessageType().equals(SystemCommand.Defeat.toString())){
-
+                controller.endTheGame(SystemCommand.Defeat);
         } else if(message.getMessageType().equals(SystemCommand.Error.toString())){
-
+            controller.endTheGame(SystemCommand.Error);
         } else if(message.getMessageType().equals(SystemCommand.Echo.toString())){
-
+                if("Error".equals(message.getMessage())){
+                    // errrr
+                } else {
+                    controller.echo(message.getMessage());
+                }
         } else {
             connector.send(new Message(ownerName,SERVERNAME,SystemCommand.UndefinedCommand.toString(),SERVERNAME));
         }
@@ -104,9 +119,15 @@ public class ConnectionManager {
 
     private void gameCommandInterpretation(Message message){
         if(message.getMessageType().equals(GameCommand.GameRequest.toString())){
-
+            controller.onRequest(message.getMessage());
         } else if(message.getMessageType().equals(GameCommand.GameResponse.toString())){
-
+            controller.onResponse(message.getMessage());
+        }else if(message.getMessageType().equals(GameCommand.Ready.toString())){
+            if(controller.isReady()) {
+                controller.startTheGame();
+            } else {
+                controller.setIsOpponentReady(true);
+            }
         }
     }
 }
