@@ -1,6 +1,7 @@
 package com.mirkowski.management;
 
 
+import com.example.bartek.shipswar.RoomGameActivity;
 import com.example.bartek.shipswar.logic.Game;
 import com.mirkowski.management.command.GameCommand;
 import com.mirkowski.management.command.SystemCommand;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Controller {
 
-    private Settings settings = new Settings(); // ustawienia apki
+    private Settings settings = null;// ustawienia apki
     private ConnectionManager connectionManager = null;
     private String opponentName = null;
     private Game game = null;
@@ -23,6 +24,15 @@ public class Controller {
     private boolean isOpponentReady = false;
     private boolean isEnableGmae = false;
 
+    //-----------------Activitys-----------------
+       private  RoomGameActivity roomGameActivity = null;
+    //-------------------------------
+
+
+    public void setRoomGameActivity(RoomGameActivity roomGameActivity) {
+        this.roomGameActivity = roomGameActivity;
+        settings = new Settings(roomGameActivity.getSharedPreferences());
+    }
 
     public Controller(){
         this.connectionManager = new ConnectionManager(this,new WebSocketConnector(connectionManager,settings.getServerAdress()),settings.getUserName());
@@ -156,7 +166,11 @@ public class Controller {
     }
 
     public void onChatMessage(String sender,String message){
-    // wyswietlanie wiadomoœci
+        roomGameActivity.addTextToMessageView(sender,message);
+    }
+    public void sendChatMessage(String recipentName,String message){
+        if("ALL".equals(recipentName))connectionManager.sendMessage(new Message(settings.getUserName(),recipentName,SystemCommand.ChatroomMessage.toString(),message));
+        else connectionManager.sendMessage(new Message(settings.getUserName(),recipentName,SystemCommand.ChatMessage.toString(),message));
     }
     public void onRequest(String message){
         // sprawdzanie czy przeciwnik trafi³ , wys³anie responsa i zmaian trybu z nas³uchu na nadawanie
@@ -184,5 +198,13 @@ public class Controller {
     public void ready(){
         if(isOpponentReady)startTheGame();
         else isReady = true;
+    }
+
+    public void changeServerAdress(String newSreverAdress){
+        settings.setServerAdress(newSreverAdress);
+    }
+
+    public void changeUserName(String newUserName){
+        settings.setUserName(newUserName);
     }
 }

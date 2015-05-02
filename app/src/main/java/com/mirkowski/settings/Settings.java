@@ -1,5 +1,7 @@
 package com.mirkowski.settings;
 
+import android.content.SharedPreferences;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -21,114 +23,47 @@ public class Settings {
 
     private String userName = null;
     private String serverAdress = null;
+    private int winCount = 0;
+    private int defeatCount = 0;
+    private SharedPreferences sharedPreferences = null;
+    private SharedPreferences.Editor sharedEditor = null;
+   // private final File file ;//= new File("res/values/settings.xml");
 
-    private final File file ;//= new File("res/values/settings.xml");
 
+    public Settings(SharedPreferences sharedPreferences){
+        this.sharedPreferences = sharedPreferences;
+        sharedEditor = this.sharedPreferences.edit();
 
-    public Settings(){
-//        try {
-//            readXMLFile();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ParserConfigurationException e) {
-//            e.printStackTrace();
-//        } catch (SAXException e) {
-//            e.printStackTrace();
-//        }
-        file = null;
+        userName = sharedPreferences.getString("UserName", "Player");
+        serverAdress = sharedPreferences.getString("ServerAdress","192.168.1.100");
+        winCount = sharedPreferences.getInt("WinCount", 0);
+        defeatCount = sharedPreferences.getInt("DefeatCount",0);
     }
-    private void readXMLFile() throws IOException, ParserConfigurationException, SAXException {
-
-
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document doc =  dBuilder.parse(file);
-        NodeList nList = doc.getElementsByTagName("settings");
-        for (int i = 0; i < nList.getLength(); i++) {
-            Node n = nList.item(i);
-            NodeList childNodes = n.getChildNodes();
-            for (int j = 0; j < childNodes.getLength(); j++) {
-                if (childNodes.item(j).getNodeName().equals("username")) {
-                    userName = childNodes.item(j).getTextContent();
-                } else if (childNodes.item(j).getNodeName().equals("serveradress")) {
-                    serverAdress = childNodes.item(j).getTextContent();
-                }
-            }
-        }
-    }
-
-    private void updateXMLFile() throws ParserConfigurationException, IOException, SAXException, TransformerException {
-
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document doc =  dBuilder.parse(file);
-        NodeList nList = doc.getElementsByTagName("settings");
-        for (int i = 0; i < nList.getLength(); i++) {
-            Node n = nList.item(i);
-            NodeList childNodes = n.getChildNodes();
-            for (int j = 0; j < childNodes.getLength(); j++) {
-                if (childNodes.item(j).getNodeName().equals("username")) {
-                    childNodes.item(j).setTextContent(userName);
-                } else if (childNodes.item(j).getNodeName().equals("serveradress")) {
-                    childNodes.item(j).setTextContent(serverAdress);
-                }
-            }
-        }
-
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = transformer = transformerFactory.newTransformer();
-        DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(file);
-        transformer.transform(source, result);
-
-    }
-
 
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
-
         this.userName = userName;
-        try {
-            updateXMLFile();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
+        sharedEditor.putString("UserName",userName);
     }
 
     public String getServerAdress() {
-
         return serverAdress+":8080/WebSocketGlassfish/chat";
     }
 
     public void setServerAdress(String serverAdress) {
-
         this.serverAdress = serverAdress;
-        try {
-            updateXMLFile();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
+        sharedEditor.putString("ServerAdress",serverAdress);
     }
 
     public void incrementWinCount(){
-
+        winCount +=1;
+        sharedEditor.putInt("WinCount",winCount);
     }
     public void incrementDefeatCount(){
-
+        defeatCount +=1;
+        sharedEditor.putInt("DefeatCount",defeatCount);
     }
 }

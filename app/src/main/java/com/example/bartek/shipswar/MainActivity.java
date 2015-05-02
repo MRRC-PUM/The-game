@@ -2,21 +2,23 @@ package com.example.bartek.shipswar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-
+import com.mirkowski.management.Controller;
 
 
 public class MainActivity extends ActionBarActivity {
-
+    private Controller controller = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        controller = new Controller();
     }
 
 
@@ -44,6 +46,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void onClickButtonGraj(View view) {
         Intent intent = new Intent(this, RoomGameActivity.class);
+        intent.putExtra("controler", (Parcelable) controller);
         startActivity(intent);
     }
 

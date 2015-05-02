@@ -1,6 +1,8 @@
 package com.example.bartek.shipswar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.mirkowski.management.Controller;
 import com.mirkowski.websocketclient.WebSocketConnector;
 import com.mirkowski.websocketclient.Message;
 
@@ -24,10 +27,15 @@ public class RoomGameActivity extends ActionBarActivity {
     EditText textMessage;
     Spinner spinner;
     EditText userNeme;
+    Controller controller = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        controller = (Controller)intent.getParcelableExtra("controler");
+        controller.setRoomGameActivity(this);
+        setPlayersList(controller.getPlayersList());
         setContentView(R.layout.activity_room_game);
         messageView = (TextView) findViewById(R.id.textMessageView);
         textMessage = (EditText) findViewById(R.id.editMessage);
@@ -46,7 +54,9 @@ public class RoomGameActivity extends ActionBarActivity {
 
 
     }
-
+    public SharedPreferences getSharedPreferences(){
+        return getSharedPreferences("com.mirkowski.settings", Context.MODE_PRIVATE);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,7 +89,7 @@ public class RoomGameActivity extends ActionBarActivity {
     }
 
     public void sendMessage(View view) {
-
+        controller.sendChatMessage("ALL",textMessage.getText().toString());
     }
 
     ///po rozmowie
@@ -113,7 +123,8 @@ public class RoomGameActivity extends ActionBarActivity {
     public void startGame(){
     }
 
-    public void addTextToMessageView(){
+    public void addTextToMessageView(String senderName,String message){
+        messageView.setText(messageView.getText().toString() + senderName+": "+message + "\n");
     }
 
     public void getMessageText(){
