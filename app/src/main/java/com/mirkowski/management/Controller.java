@@ -2,7 +2,10 @@ package com.mirkowski.management;
 
 
 import com.example.bartek.shipswar.MainActivity;
+import com.example.bartek.shipswar.MapGameActivity;
 import com.example.bartek.shipswar.RoomGameActivity;
+import com.example.bartek.shipswar.SettingsActivity;
+import com.example.bartek.shipswar.StatisticsActivity;
 import com.example.bartek.shipswar.logic.Game;
 import com.mirkowski.management.command.GameCommand;
 import com.mirkowski.management.command.SystemCommand;
@@ -28,6 +31,9 @@ public class Controller {
     //-----------------Activitys-----------------
        private MainActivity mainActivity = null;
        private  RoomGameActivity roomGameActivity = null;
+       private SettingsActivity settingsActivity = null;
+       private StatisticsActivity statisticsActivity = null;
+       private MapGameActivity mapGameActivity = null;
     //-------------------------------
 
     public void setMainActivity(MainActivity mainActivity) {
@@ -40,15 +46,27 @@ public class Controller {
 
     }
 
+    public void setSettingsActivity(SettingsActivity settingsActivity) {
+        this.settingsActivity = settingsActivity;
+    }
+
+    public void setStatisticsActivity(StatisticsActivity statisticsActivity) {
+        this.statisticsActivity = statisticsActivity;
+    }
+
+    public void setMapGameActivity(MapGameActivity mapGameActivity) {
+        this.mapGameActivity = mapGameActivity;
+    }
+
     public Controller(){
 
         this.connectionManager = new ConnectionManager(this,new WebSocketConnector(settings.getServerAdress()),settings.getUserName());
     }
 
 
-    public void setOpponentName(String opponentName) {
-        this.opponentName = opponentName;
-    }
+//    public void setOpponentName(String opponentName) {
+//        this.opponentName = opponentName;
+//    }
     // metoda do ustawiena nazwu usera na tak¹ pod jak¹ zosta³ zarejstrowny na servie
     public void setOwnerName(String ownerName){
         settings.setUserName(ownerName);
