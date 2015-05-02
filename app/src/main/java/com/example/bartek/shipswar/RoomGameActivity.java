@@ -54,9 +54,9 @@ public class RoomGameActivity extends ActionBarActivity {
 
 
     }
-    public SharedPreferences getSharedPreferences(){
-        return getSharedPreferences("com.mirkowski.settings", Context.MODE_PRIVATE);
-    }
+//    public SharedPreferences getSharedPreferences(){
+//        return getSharedPreferences("com.mirkowski.settings", Context.MODE_PRIVATE);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

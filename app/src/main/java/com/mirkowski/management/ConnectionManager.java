@@ -24,6 +24,7 @@ public class ConnectionManager {
         this.controller = controller;
         this.connector = connector;
         this.ownerName = ownerName;
+        connector.setConnectionMenager(this);
         connector.start();
     }
 

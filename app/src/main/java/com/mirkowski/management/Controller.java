@@ -1,6 +1,7 @@
 package com.mirkowski.management;
 
 
+import com.example.bartek.shipswar.MainActivity;
 import com.example.bartek.shipswar.RoomGameActivity;
 import com.example.bartek.shipswar.logic.Game;
 import com.mirkowski.management.command.GameCommand;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  */
 public class Controller {
 
-    private Settings settings = null;// ustawienia apki
+    private Settings settings = new Settings();// ustawienia apki
     private ConnectionManager connectionManager = null;
     private String opponentName = null;
     private Game game = null;
@@ -25,17 +26,23 @@ public class Controller {
     private boolean isEnableGmae = false;
 
     //-----------------Activitys-----------------
+       private MainActivity mainActivity = null;
        private  RoomGameActivity roomGameActivity = null;
     //-------------------------------
 
+    public void setMainActivity(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+        settings = new Settings(mainActivity.getSharedPreferences());
+    }
 
     public void setRoomGameActivity(RoomGameActivity roomGameActivity) {
         this.roomGameActivity = roomGameActivity;
-        settings = new Settings(roomGameActivity.getSharedPreferences());
+
     }
 
     public Controller(){
-        this.connectionManager = new ConnectionManager(this,new WebSocketConnector(connectionManager,settings.getServerAdress()),settings.getUserName());
+
+        this.connectionManager = new ConnectionManager(this,new WebSocketConnector(settings.getServerAdress()),settings.getUserName());
     }
 
 

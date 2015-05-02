@@ -7,7 +7,7 @@ import com.mirkowski.websocketclient.Message;
  */
 public interface Connector {
 
-
+    public void setConnectionMenager(ConnectionManager connectionMenager);
     public void start();
     public void stop();
     public void send(Message message);

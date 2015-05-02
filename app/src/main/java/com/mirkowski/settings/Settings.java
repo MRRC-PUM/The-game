@@ -27,9 +27,15 @@ public class Settings {
     private int defeatCount = 0;
     private SharedPreferences sharedPreferences = null;
     private SharedPreferences.Editor sharedEditor = null;
-   // private final File file ;//= new File("res/values/settings.xml");
 
 
+    public Settings(){
+
+        userName =  "Player";
+        serverAdress = "192.168.1.100";
+        winCount =  0;
+        defeatCount = 0;
+    }
     public Settings(SharedPreferences sharedPreferences){
         this.sharedPreferences = sharedPreferences;
         sharedEditor = this.sharedPreferences.edit();
@@ -39,6 +45,7 @@ public class Settings {
         winCount = sharedPreferences.getInt("WinCount", 0);
         defeatCount = sharedPreferences.getInt("DefeatCount",0);
     }
+
 
     public String getUserName() {
         return userName;

@@ -1,7 +1,9 @@
 package com.example.bartek.shipswar;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -19,9 +21,12 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         controller = new Controller();
+        controller.setMainActivity(this);
     }
 
-
+    public SharedPreferences getSharedPreferences(){
+        return getSharedPreferences("com.mirkowski.settings", Context.MODE_PRIVATE);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

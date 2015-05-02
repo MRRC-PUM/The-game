@@ -19,11 +19,15 @@ public class WebSocketConnector implements Connector{
     private final WebSocketConnection mConnection = new WebSocketConnection();
     private String serverURI = null;
 
-    public WebSocketConnector(ConnectionManager connectionManager, String serverURI){
-        this.connectionManager = connectionManager;
+    public WebSocketConnector(String serverURI){
         this.serverURI = serverURI;
     }
 
+
+    @Override
+    public void setConnectionMenager(ConnectionManager connectionMenager) {
+        this.connectionManager = connectionMenager;
+    }
 
     public void start() {
 
