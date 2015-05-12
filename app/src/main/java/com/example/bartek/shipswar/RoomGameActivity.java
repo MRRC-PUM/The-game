@@ -147,5 +147,7 @@ public class RoomGameActivity extends ActionBarActivity {
     }
 
 
-
+    public void expandList(View view) {
+        setPlayersList(controller.getPlayersList());
+    }
 }
