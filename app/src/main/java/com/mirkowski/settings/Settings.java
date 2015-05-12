@@ -41,7 +41,7 @@ public class Settings {
         sharedEditor = this.sharedPreferences.edit();
 
         userName = sharedPreferences.getString("UserName", "Player");
-        serverAdress = sharedPreferences.getString("ServerAdress","192.168.1.100");
+        serverAdress = sharedPreferences.getString("ServerAdress","192.168.2.100");
         winCount = sharedPreferences.getInt("WinCount", 0);
         defeatCount = sharedPreferences.getInt("DefeatCount",0);
     }
@@ -57,7 +57,7 @@ public class Settings {
     }
 
     public String getServerAdress() {
-        return serverAdress+":8080/WebSocketGlassfish/chat";
+        return " ws://"+serverAdress+":8080/WebSocketGlassfish/chat";
     }
 
     public void setServerAdress(String serverAdress) {

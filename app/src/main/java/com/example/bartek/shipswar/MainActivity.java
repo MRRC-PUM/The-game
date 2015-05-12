@@ -13,15 +13,18 @@ import android.view.View;
 
 import com.mirkowski.management.Controller;
 
+import java.io.Serializable;
+
 
 public class MainActivity extends ActionBarActivity {
-    private Controller controller = null;
+    protected static Controller controller = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         controller = new Controller();
         controller.setMainActivity(this);
+
     }
 
     public SharedPreferences getSharedPreferences(){
@@ -51,8 +54,8 @@ public class MainActivity extends ActionBarActivity {
 
     public void onClickButtonGraj(View view) {
         Intent intent = new Intent(this, RoomGameActivity.class);
-        intent.putExtra("controler", (Parcelable) controller);
         startActivity(intent);
+
     }
 
     public void onClickButtonOpcje(View view) {
@@ -75,8 +78,7 @@ public class MainActivity extends ActionBarActivity {
         //Controler controler = new Controler(owner);
     }
 
-    //public Controler getControler(){
-    //
-    //   return ;
-    //}
+    public static Controller getController() {
+        return controller;
+    }
 }

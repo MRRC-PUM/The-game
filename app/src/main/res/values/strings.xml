@@ -7,10 +7,10 @@
     <string name="title_activity_room_game">RoomGameActivity</string>
 
     <string-array name="players_test_names">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
+        <item>Web</item>
+        <item>Player2</item>
+        <item>Player3</item>
+        <item>Player4</item>
         <item>Jupiter</item>
         <item>Saturn</item>
         <item>Uranus</item>
