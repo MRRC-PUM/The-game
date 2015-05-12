@@ -6,11 +6,11 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,6 +25,7 @@ import java.util.List;
 public class RoomGameActivity extends ActionBarActivity {
 
     TextView messageView;
+    TextView viewInfo;
     EditText textMessage;
     Spinner spinner;
     EditText userNeme;
@@ -33,19 +34,17 @@ public class RoomGameActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        controller = (Controller)intent.getParcelableExtra("controler");
+       controller = MainActivity.controller;
+
         controller.setRoomGameActivity(this);
-        setPlayersList(controller.getPlayersList());
+       // setPlayersList(controller.getPlayersList());
+        Log.d("Controler",controller.toString());
         setContentView(R.layout.activity_room_game);
+        viewInfo = (TextView) findViewById(R.id.textViewOtherPLayerWaiting);
         messageView = (TextView) findViewById(R.id.textMessageView);
         textMessage = (EditText) findViewById(R.id.editMessage);
         spinner = (Spinner) findViewById(R.id.spinner);
         userNeme = (EditText) findViewById(R.id.editUserName);
-
-
-        Button buttonRozpocznij = (Button) findViewById(R.id.buttonRozpocznijGre);
-        buttonRozpocznij.setEnabled(false);
 
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -86,16 +85,21 @@ public class RoomGameActivity extends ActionBarActivity {
     }
 
     public void onClickButtonRozpocznijGre(View view) {
-
         Intent intent = new Intent(this, MapGameActivity.class);
         startActivity(intent);
     }
 
     public void onClickButtonZapros(View view) {
+        setLabelText("Mama");
     }
 
     public void sendMessage(View view) {
-        controller.sendChatMessage("ALL",textMessage.getText().toString());
+        String tempname = getSelectedPlayer();
+        if(tempname == "Web")
+             controller.sendChatMessage("ALL",textMessage.getText().toString());
+        else controller.sendChatMessage(tempname,textMessage.getText().toString());
+
+        textMessage.setText("");
     }
 
     ///po rozmowie
@@ -105,6 +109,8 @@ public class RoomGameActivity extends ActionBarActivity {
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        Log.d("adapter", dataAdapter.toString());
+        Log.d("spiner",(spinner == null)? "null":"nie null" );
 
         spinner.setAdapter(dataAdapter);
 
@@ -118,17 +124,13 @@ public class RoomGameActivity extends ActionBarActivity {
 
     public void invite(){
         getSelectedPlayer();
-        controller.setImHost(true);
     }
 
     public void setLabelText(String text){
-        TextView textView = (TextView) findViewById(R.id.textViewOtherPLayerWaiting);
-        textView.setText(text);
+        viewInfo.setText(text);
     }
 
     public void setEnabled(Boolean flag){
-        Button buttonRozpocznij = (Button) findViewById(R.id.buttonRozpocznijGre);
-        buttonRozpocznij.setEnabled(true);
     }
 
     public void startGame(){
@@ -145,4 +147,7 @@ public class RoomGameActivity extends ActionBarActivity {
     }
 
 
+    public void expandList(View view) {
+        setPlayersList(controller.getPlayersList());
+    }
 }
