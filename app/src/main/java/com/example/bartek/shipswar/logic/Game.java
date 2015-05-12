@@ -10,6 +10,16 @@ public class Game {
     int opponentPoints;
     boolean mode;
     final int SHOT = 9;
+    final int LOSE = 8;
+    final public boolean listen = true;
+    final public boolean sending = false;
+
+
+
+    public Game(){
+
+    }
+
 
     public int[][] getOwner() {
         return owner;
@@ -51,7 +61,13 @@ public class Game {
         this.mode = mode;
     }
 
-    public void setShot(int[][] tab, int x, int y){
-        tab[x][y]= SHOT;
+    public void setShotOpponentMap(int x, int y, int status){
+      if (status==1) opponent[x][y]=SHOT;
+      if (status==0) opponent[x][y]=LOSE;
+    }
+
+    public boolean OpponentShot (int x, int y) {
+        if (owner[x][y]==2) { owner[x][y] = SHOT; return true;}
+        else {owner[x][y] = LOSE; return false;}
     }
 }

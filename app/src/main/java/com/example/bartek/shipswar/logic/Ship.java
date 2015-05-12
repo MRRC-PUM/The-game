@@ -46,4 +46,9 @@ public class Ship {
     public void setOrientation(boolean orientation) {
         this.orientation = orientation;
     }
+
+
+    public String getType(){
+        return this.type;
+    }
 }

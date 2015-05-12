@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,6 +42,10 @@ public class RoomGameActivity extends ActionBarActivity {
         textMessage = (EditText) findViewById(R.id.editMessage);
         spinner = (Spinner) findViewById(R.id.spinner);
         userNeme = (EditText) findViewById(R.id.editUserName);
+
+
+        Button buttonRozpocznij = (Button) findViewById(R.id.buttonRozpocznijGre);
+        buttonRozpocznij.setEnabled(false);
 
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -81,6 +86,7 @@ public class RoomGameActivity extends ActionBarActivity {
     }
 
     public void onClickButtonRozpocznijGre(View view) {
+
         Intent intent = new Intent(this, MapGameActivity.class);
         startActivity(intent);
     }
@@ -112,12 +118,17 @@ public class RoomGameActivity extends ActionBarActivity {
 
     public void invite(){
         getSelectedPlayer();
+        controller.setImHost(true);
     }
 
     public void setLabelText(String text){
+        TextView textView = (TextView) findViewById(R.id.textViewOtherPLayerWaiting);
+        textView.setText(text);
     }
 
     public void setEnabled(Boolean flag){
+        Button buttonRozpocznij = (Button) findViewById(R.id.buttonRozpocznijGre);
+        buttonRozpocznij.setEnabled(true);
     }
 
     public void startGame(){

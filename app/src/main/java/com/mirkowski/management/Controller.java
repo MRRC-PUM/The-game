@@ -1,8 +1,11 @@
 package com.mirkowski.management;
 
 
+import android.content.Intent;
+
 import com.example.bartek.shipswar.MainActivity;
 import com.example.bartek.shipswar.MapGameActivity;
+import com.example.bartek.shipswar.MapPlayActivity;
 import com.example.bartek.shipswar.RoomGameActivity;
 import com.example.bartek.shipswar.SettingsActivity;
 import com.example.bartek.shipswar.StatisticsActivity;
@@ -27,10 +30,11 @@ public class Controller {
     private boolean isReady= false;
     private boolean isOpponentReady = false;
     private boolean isEnableGmae = false;
+    private boolean imHost = false;
 
     //-----------------Activitys-----------------
        private MainActivity mainActivity = null;
-       private  RoomGameActivity roomGameActivity = null;
+       private RoomGameActivity roomGameActivity = null;
        private SettingsActivity settingsActivity = null;
        private StatisticsActivity statisticsActivity = null;
        private MapGameActivity mapGameActivity = null;
@@ -67,6 +71,8 @@ public class Controller {
 //    public void setOpponentName(String opponentName) {
 //        this.opponentName = opponentName;
 //    }
+
+
     // metoda do ustawiena nazwu usera na tak¹ pod jak¹ zosta³ zarejstrowny na servie
     public void setOwnerName(String ownerName){
         settings.setUserName(ownerName);
@@ -88,6 +94,8 @@ public class Controller {
     public void inviteToGame(String playerName){
         connectionManager.sendMessage(new Message(settings.getUserName(),"System",SystemCommand.StartGameRequest.toString(),playerName));
     }
+
+
     // metoda do odpowiedzi na zaproszenie
     public void responseOnInviteToGame(boolean isAgree,String playerName){
         if(isAgree) {
@@ -103,6 +111,8 @@ public class Controller {
     public boolean isReady() {
         return isReady;
     }
+
+
     // connector ustawia jesli przeciwnik jest gotowy
     public void setIsOpponentReady(boolean isOpponentReady) {
         this.isOpponentReady = isOpponentReady;
@@ -159,18 +169,23 @@ public class Controller {
     // metoda wywo³ywana przy zgodzie obu graczy na gre
     public void enableGame(){
         isEnableGmae = true;
-        // ustaw button rozpocznij gre na enabled
-        // i wywo³aj metode createGame();
+        if(roomGameActivity!=null){
+            roomGameActivity.setEnabled(true);           // ustaw button rozpocznij gre na enabled
+            createGame();                                // i wywo³aj metode createGame();
+        }
     }
 
     public void createGame(){
-        // create nowy obiekt game
+        Game game = new Game();// create nowy obiekt game
+        //?????????????????????????
         // game = gameFactory.createGame() // coœ takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
-        // jek stowrzysz to wywao³aj metode ready()
+        ready();// jek stowrzysz to wywao³aj metode ready()
     }
 
     public void startTheGame(){
-        // tu wstaw wszustko
+
+                //wystartuj activity na ktorym gramy
+                // tu wstaw wszustko
     }
 
     public void endTheGame(SystemCommand result){
@@ -197,13 +212,33 @@ public class Controller {
         if("ALL".equals(recipentName))connectionManager.sendMessage(new Message(settings.getUserName(),recipentName,SystemCommand.ChatroomMessage.toString(),message));
         else connectionManager.sendMessage(new Message(settings.getUserName(),recipentName,SystemCommand.ChatMessage.toString(),message));
     }
+
+
+    //sprawdza czy wróg trafil i odpowiada mu
     public void onRequest(String message){
-        // sprawdzanie czy przeciwnik trafi³ , wys³anie responsa i zmaian trybu z nas³uchu na nadawanie
-        // masz do wys³ana metode response np response(message,jakaœ metoda sprawdxzaj¹ca zwracaj¹ca boolean(message))
+        int x = Integer.valueOf(message.charAt(0));
+        int y = Integer.valueOf(message.charAt(1));
+
+       if (game.OpponentShot(x, y)) {        //sprawdzanie czy przeciwnik trafi³ , wys³anie responsa i zmaian trybu z nas³uchu na nadawanie
+           response(""+x+""+y, true);       // masz do wys³ana metode response np response(message,jakaœ metoda sprawdxzaj¹ca zwracaj¹ca boolean(message))
+       } else response(""+x+""+y, false);
+
+
+
     }
 
+    //konwertuje poszczegolne znaki Stringa na wspó³rzêdne i status trafienia,
+    //ustawia strzal/pudlo w tablicy
+    //zmienia na nasluch
     public void onResponse(String message){
-        // sprawdzanie czy my trafiismy  i zmana trybu na nas³uch
+        int x = Integer.valueOf(message.charAt(0));
+        int y = Integer.valueOf(message.charAt(1));
+        int status = Integer.valueOf(message.charAt(2));
+
+            game.setShotOpponentMap(x, y, status);        // sprawdzanie czy my trafiismy iustawienie tego na naszej mapce Opponenta
+            game.setMode(game.listen);       //i zmana trybu na nas³uch
+
+
     }
 
     public void request(String coordinates){
@@ -231,5 +266,9 @@ public class Controller {
 
     public void changeUserName(String newUserName){
         settings.setUserName(newUserName);
+    }
+
+    public void setImHost(boolean flag) {
+        this.imHost=flag;
     }
 }
