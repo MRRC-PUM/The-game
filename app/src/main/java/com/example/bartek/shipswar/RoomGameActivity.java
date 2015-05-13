@@ -46,15 +46,15 @@ public class RoomGameActivity extends ActionBarActivity {
         spinner = (Spinner) findViewById(R.id.spinner);
         userNeme = (EditText) findViewById(R.id.editUserName);
 
-
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                        R.array.players_test_names, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+//
+//        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+//// Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+//                        R.array.players_test_names, android.R.layout.simple_spinner_item);
+//// Specify the layout to use when the list of choices appears
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//// Apply the adapter to the spinner
+//        spinner.setAdapter(adapter);
 
 
     }
@@ -95,7 +95,7 @@ public class RoomGameActivity extends ActionBarActivity {
 
     public void sendMessage(View view) {
         String tempname = getSelectedPlayer();
-        if(tempname == "Web")
+        if("Web".equals(tempname))
              controller.sendChatMessage("ALL",textMessage.getText().toString());
         else controller.sendChatMessage(tempname,textMessage.getText().toString());
 
@@ -112,7 +112,9 @@ public class RoomGameActivity extends ActionBarActivity {
         Log.d("adapter", dataAdapter.toString());
         Log.d("spiner",(spinner == null)? "null":"nie null" );
 
-        spinner.setAdapter(dataAdapter);
+        try {
+            spinner.setAdapter(dataAdapter);
+        }catch (Exception e){}
 
     }
 

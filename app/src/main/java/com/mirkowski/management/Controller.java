@@ -83,8 +83,10 @@ public class Controller implements Parcelable {
     public void viewInfo(String senderName, String message){
         // dodaj metode do ustawienia textu na lebelu :)
         Log.d("INFO", message);
-        //roomGameActivity.setLabelText(senderName+" "+message);
+        roomGameActivity.setLabelText(senderName + " " + message);
     }
+
+
 
     public String getOpponentName() {
         return opponentName;
@@ -205,6 +207,13 @@ public class Controller implements Parcelable {
     public void sendChatMessage(String recipentName,String message){
         if("ALL".equals(recipentName))connectionManager.sendMessage(new Message(settings.getUserName(),recipentName,SystemCommand.ChatroomMessage.toString(),message));
         else connectionManager.sendMessage(new Message(settings.getUserName(),recipentName,SystemCommand.ChatMessage.toString(),message));
+    }
+
+    //gdy przujdzie zaproszenie
+    public void onInvite(String senderName){
+       // tutaj dodaj wyœwietlanie dialogu
+       // responseOnInviteToGame(tutaj rezultat dialogu,senderName );
+
     }
     public void onRequest(String message){
         // sprawdzanie czy przeciwnik trafi³ , wys³anie responsa i zmaian trybu z nas³uchu na nadawanie

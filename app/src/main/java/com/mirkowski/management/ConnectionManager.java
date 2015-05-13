@@ -1,5 +1,7 @@
 package com.mirkowski.management;
 
+import android.util.Log;
+
 import com.mirkowski.management.command.GameCommand;
 import com.mirkowski.management.command.SystemCommand;
 import com.mirkowski.management.status.ConnectionStatus;
@@ -34,6 +36,7 @@ public class ConnectionManager {
 
     public ArrayList<String> getPlayerList() {
         if(playerList == null)getPlayersListfromServer("");
+        Log.d("Players",playerList.toString());
         return playerList;
     }
 
@@ -61,6 +64,7 @@ public class ConnectionManager {
     public void connectionLost(String reason){
         controller.viewInfo("Application ",reason);
     }
+
     private void getPlayersListfromServer(String pattern){
         sendMessage(new Message(ownerName,"System",SystemCommand.PlayersList.toString(),pattern));
     }
@@ -88,8 +92,10 @@ public class ConnectionManager {
         if(message.getMessageType().equals(SystemCommand.Registration.toString())){
             ownerName = message.getMessage();
             controller.setOwnerName(message.getMessage());
+            sendMessage(new Message(ownerName, "System", "PlayersList", ""));
         } else if(message.getMessageType().equals(SystemCommand.StartGameRequest.toString())){
-            controller.viewInfo(message.getSenderName(),"Player "+message.getMessage()+" invites you to the game");
+//            controller.viewInfo(message.getSenderName(),"Player "+message.getMessage()+" invites you to the game");
+            controller.onInvite(message.getMessage());
         } else if(message.getMessageType().equals(SystemCommand.BusyGameResponse.toString())){
             controller.viewInfo(message.getSenderName(),"Player "+message.getMessage()+" is busy ,try again later");
         } else if(message.getMessageType().equals(SystemCommand.NoStartGameResponse.toString())){

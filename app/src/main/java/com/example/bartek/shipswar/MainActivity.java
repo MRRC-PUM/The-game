@@ -15,7 +15,7 @@ import com.mirkowski.management.Controller;
 
 
 public class MainActivity extends ActionBarActivity {
-    private Controller controller = null;
+    protected static Controller controller = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

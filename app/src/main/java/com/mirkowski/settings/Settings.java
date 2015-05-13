@@ -32,7 +32,7 @@ public class Settings {
     public Settings(){
 
         userName =  "Player";
-        serverAdress = "192.168.1.100";
+        serverAdress = "192.168.2.100";
         winCount =  0;
         defeatCount = 0;
     }
