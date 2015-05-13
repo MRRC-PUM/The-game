@@ -1,6 +1,5 @@
 package com.example.bartek.shipswar;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -37,7 +36,7 @@ public class RoomGameActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        controller = MainActivity.controller;
-
+        
         controller.setRoomGameActivity(this);
        // setPlayersList(controller.getPlayersList());
         Log.d("Controler",controller.toString());
@@ -48,15 +47,15 @@ public class RoomGameActivity extends ActionBarActivity {
         spinner = (Spinner) findViewById(R.id.spinner);
         userNeme = (EditText) findViewById(R.id.editUserName);
 
-
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                        R.array.players_test_names, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+//
+//        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+//// Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+//                        R.array.players_test_names, android.R.layout.simple_spinner_item);
+//// Specify the layout to use when the list of choices appears
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//// Apply the adapter to the spinner
+//        spinner.setAdapter(adapter);
 
 
     }
@@ -92,12 +91,13 @@ public class RoomGameActivity extends ActionBarActivity {
     }
 
     public void onClickButtonZapros(View view) {
-        setLabelText("Mama");
+
+        controller.inviteToGame(getSelectedPlayer());
     }
 
     public void sendMessage(View view) {
         String tempname = getSelectedPlayer();
-        if(tempname == "Web")
+        if("Web".equals(tempname))
              controller.sendChatMessage("ALL",textMessage.getText().toString());
         else controller.sendChatMessage(tempname,textMessage.getText().toString());
 
@@ -112,9 +112,11 @@ public class RoomGameActivity extends ActionBarActivity {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         Log.d("adapter", dataAdapter.toString());
-        Log.d("spiner",(spinner == null)? "null":"nie null" );
+        Log.d("spiner", (spinner == null) ? "null" : "nie null");
 
-        spinner.setAdapter(dataAdapter);
+        try {
+            spinner.setAdapter(dataAdapter);
+        }catch (Exception e){}
 
     }
 
@@ -150,9 +152,8 @@ public class RoomGameActivity extends ActionBarActivity {
 
 
     public void expandList(View view) {
-      //
-      //  setPlayersList(controller.getPlayersList());
-        showDialog("Bartek");
+
+        setPlayersList(controller.getPlayersList());
     }
 
     public void showDialog(String name){
@@ -160,8 +161,7 @@ public class RoomGameActivity extends ActionBarActivity {
 
         WantPlayFragment invet = new WantPlayFragment();
         invet.setName(name);
+        invet.setController(controller);
         invet.show(manager, "WantPlayFragment");
     }
-
-
 }

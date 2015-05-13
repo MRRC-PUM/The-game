@@ -66,14 +66,14 @@ public class Controller implements Parcelable {
 
     public Controller(){
 
-        this.connectionManager = new ConnectionManager(this,new WebSocketConnector("ws://192.168.43.109:8080/WebSocketGlassfish/chat"),settings.getUserName());
-//        this.connectionManager = new ConnectionManager(this,new WebSocketConnector(settings.getServerAdress()),settings.getUserName());
+//        this.connectionManager = new ConnectionManager(this,new WebSocketConnector("ws://192.168.2.100:8080/WebSocketGlassfish/chat"),settings.getUserName());
+        this.connectionManager = new ConnectionManager(this,new WebSocketConnector(settings.getServerAdress()),settings.getUserName());
     }
 
 
-//    public void setOpponentName(String opponentName) {
-//        this.opponentName = opponentName;
-//    }
+    public void setOpponentName(String opponentName) {
+        this.opponentName = opponentName;
+    }
     // metoda do ustawiena nazwu usera na takï¿½ pod jakï¿½ zostaï¿½ zarejstrowny na servie
     public void setOwnerName(String ownerName){
         settings.setUserName(ownerName);
@@ -100,6 +100,7 @@ public class Controller implements Parcelable {
 
     // metoda do zapraszania
     public void inviteToGame(String playerName){
+        opponentName = playerName;
         connectionManager.sendMessage(new Message(settings.getUserName(),"System",SystemCommand.StartGameRequest.toString(),playerName));
     }
     // metoda do odpowiedzi na zaproszenie
@@ -214,8 +215,7 @@ public class Controller implements Parcelable {
 
     //gdy przujdzie zaproszenie
     public void onInvite(String senderName){
-       // tutaj dodaj wyœwietlanie dialogu
-       // responseOnInviteToGame(tutaj rezultat dialogu,senderName );
+        roomGameActivity.showDialog(senderName);
 
     }
     public void onRequest(String message){

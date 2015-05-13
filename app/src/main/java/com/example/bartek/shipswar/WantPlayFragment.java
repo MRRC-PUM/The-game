@@ -12,13 +12,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.mirkowski.management.Controller;
+
 import org.w3c.dom.Text;
 
 
 public class WantPlayFragment extends DialogFragment implements View.OnClickListener{
-    Button Yes, No;
-    String name;
-    TextView textView;
+
+    private Controller controller = null;
+    private Button Yes, No;
+    private String name;
+    private TextView textView;
+
+
+    public void setController(Controller controller) { this.controller = controller; }
+
     public void setName(String name){
         this.name = name;
     }
@@ -38,12 +46,13 @@ public class WantPlayFragment extends DialogFragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.Yes) {
-            //tu jak takdismiss();
+
+            controller.responseOnInviteToGame(true,name);
             dismiss();
         }
         else
         {
-            //tu jak nie
+            controller.responseOnInviteToGame(false,name);
             WantPlayFragment.this.dismiss();
         }
     }

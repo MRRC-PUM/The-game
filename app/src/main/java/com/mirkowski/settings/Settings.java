@@ -57,7 +57,7 @@ public class Settings {
     }
 
     public String getServerAdress() {
-        return " ws://"+serverAdress+":8080/WebSocketGlassfish/chat";
+        return "ws://"+serverAdress+":8080/WebSocketGlassfish/chat";
     }
 
     public void setServerAdress(String serverAdress) {

@@ -36,7 +36,6 @@ public class ConnectionManager {
 
     public ArrayList<String> getPlayerList() {
         if(playerList == null)getPlayersListfromServer("");
-        Log.d("Players",playerList.toString());
         return playerList;
     }
 
@@ -97,12 +96,14 @@ public class ConnectionManager {
 //            controller.viewInfo(message.getSenderName(),"Player "+message.getMessage()+" invites you to the game");
             controller.onInvite(message.getMessage());
         } else if(message.getMessageType().equals(SystemCommand.BusyGameResponse.toString())){
+            controller.setOpponentName("");
             controller.viewInfo(message.getSenderName(),"Player "+message.getMessage()+" is busy ,try again later");
         } else if(message.getMessageType().equals(SystemCommand.NoStartGameResponse.toString())){
+            controller.setOpponentName("");
             controller.viewInfo(message.getSenderName(),"Player "+message.getMessage()+" does not want to play with you");
         } else if(message.getMessageType().equals(SystemCommand.StartGame.toString())){
             if(message.getMessage().equals(controller.getOpponentName())){
-                controller.viewInfo(message.getSenderName(),"Player "+message.getMessage()+" wants to play with you");
+                controller.viewInfo(message.getSenderName(),"You can play with "+message.getMessage()+". Start the game button below");
                 controller.enableGame();
             } else {
                 connector.send(new Message(ownerName, SERVERNAME, SystemCommand.WrongDestinationAddress.toString(), message.getSenderName()));
