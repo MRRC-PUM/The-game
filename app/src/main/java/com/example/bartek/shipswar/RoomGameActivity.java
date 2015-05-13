@@ -1,5 +1,7 @@
 package com.example.bartek.shipswar;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,15 +48,15 @@ public class RoomGameActivity extends ActionBarActivity {
         spinner = (Spinner) findViewById(R.id.spinner);
         userNeme = (EditText) findViewById(R.id.editUserName);
 
-//
-//        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-//// Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-//                        R.array.players_test_names, android.R.layout.simple_spinner_item);
-//// Specify the layout to use when the list of choices appears
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//// Apply the adapter to the spinner
-//        spinner.setAdapter(adapter);
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                        R.array.players_test_names, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
 
     }
@@ -95,7 +97,7 @@ public class RoomGameActivity extends ActionBarActivity {
 
     public void sendMessage(View view) {
         String tempname = getSelectedPlayer();
-        if("Web".equals(tempname))
+        if(tempname == "Web")
              controller.sendChatMessage("ALL",textMessage.getText().toString());
         else controller.sendChatMessage(tempname,textMessage.getText().toString());
 
@@ -112,9 +114,7 @@ public class RoomGameActivity extends ActionBarActivity {
         Log.d("adapter", dataAdapter.toString());
         Log.d("spiner",(spinner == null)? "null":"nie null" );
 
-        try {
-            spinner.setAdapter(dataAdapter);
-        }catch (Exception e){}
+        spinner.setAdapter(dataAdapter);
 
     }
 
@@ -150,6 +150,18 @@ public class RoomGameActivity extends ActionBarActivity {
 
 
     public void expandList(View view) {
-        setPlayersList(controller.getPlayersList());
+      //
+      //  setPlayersList(controller.getPlayersList());
+        showDialog("Bartek");
     }
+
+    public void showDialog(String name){
+        FragmentManager manager = getFragmentManager();
+
+        WantPlayFragment invet = new WantPlayFragment();
+        invet.setName(name);
+        invet.show(manager, "WantPlayFragment");
+    }
+
+
 }

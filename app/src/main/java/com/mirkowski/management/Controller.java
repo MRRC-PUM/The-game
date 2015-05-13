@@ -66,7 +66,7 @@ public class Controller implements Parcelable {
 
     public Controller(){
 
-        this.connectionManager = new ConnectionManager(this,new WebSocketConnector("ws://192.168.2.100:8080/WebSocketGlassfish/chat"),settings.getUserName());
+        this.connectionManager = new ConnectionManager(this,new WebSocketConnector("ws://192.168.43.109:8080/WebSocketGlassfish/chat"),settings.getUserName());
 //        this.connectionManager = new ConnectionManager(this,new WebSocketConnector(settings.getServerAdress()),settings.getUserName());
     }
 
@@ -74,7 +74,7 @@ public class Controller implements Parcelable {
 //    public void setOpponentName(String opponentName) {
 //        this.opponentName = opponentName;
 //    }
-    // metoda do ustawiena nazwu usera na tak¹ pod jak¹ zosta³ zarejstrowny na servie
+    // metoda do ustawiena nazwu usera na takï¿½ pod jakï¿½ zostaï¿½ zarejstrowny na servie
     public void setOwnerName(String ownerName){
         settings.setUserName(ownerName);
     }
@@ -91,10 +91,13 @@ public class Controller implements Parcelable {
     public String getOpponentName() {
         return opponentName;
     }
-    // t¹ metode podepnij do listy tak ¿êby przy karzdym rozwijaniu ³adowa³o ca³¹ liste graczy
+    // tï¿½ metode podepnij do listy tak ï¿½ï¿½by przy karzdym rozwijaniu ï¿½adowaï¿½o caï¿½ï¿½ liste graczy
+
     public ArrayList<String> getPlayersList() {
         return connectionManager.getPlayerList();
     }
+
+
     // metoda do zapraszania
     public void inviteToGame(String playerName){
         connectionManager.sendMessage(new Message(settings.getUserName(),"System",SystemCommand.StartGameRequest.toString(),playerName));
@@ -119,12 +122,12 @@ public class Controller implements Parcelable {
         this.isOpponentReady = isOpponentReady;
     }
 
-    // metoda do echa , nie wiem czy bêdzie potrzebna ale nie kasowa³em
+    // metoda do echa , nie wiem czy bï¿½dzie potrzebna ale nie kasowaï¿½em
     public void echo(String result){
 
     }
 
-    //metoda wywo³ywanna przy wyjœciu z okna gry b¹dz z okna RoomGame
+    //metoda wywoï¿½ywanna przy wyjï¿½ciu z okna gry bï¿½dz z okna RoomGame
     public void destroy(){
         if(game != null){
             if(isOpponentReady == false){
@@ -167,17 +170,17 @@ public class Controller implements Parcelable {
         isEnableGmae = false;
     }
 
-    // metoda wywo³ywana przy zgodzie obu graczy na gre
+    // metoda wywoï¿½ywana przy zgodzie obu graczy na gre
     public void enableGame(){
         isEnableGmae = true;
         // ustaw button rozpocznij gre na enabled
-        // i wywo³aj metode createGame();
+        // i wywoï¿½aj metode createGame();
     }
 
     public void createGame(){
         // create nowy obiekt game
-        // game = gameFactory.createGame() // coœ takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
-        // jek stowrzysz to wywao³aj metode ready()
+        // game = gameFactory.createGame() // coï¿½ takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
+        // jek stowrzysz to wywaoï¿½aj metode ready()
     }
 
     public void startTheGame(){
@@ -216,12 +219,12 @@ public class Controller implements Parcelable {
 
     }
     public void onRequest(String message){
-        // sprawdzanie czy przeciwnik trafi³ , wys³anie responsa i zmaian trybu z nas³uchu na nadawanie
-        // masz do wys³ana metode response np response(message,jakaœ metoda sprawdxzaj¹ca zwracaj¹ca boolean(message))
+        // sprawdzanie czy przeciwnik trafiï¿½ , wysï¿½anie responsa i zmaian trybu z nasï¿½uchu na nadawanie
+        // masz do wysï¿½ana metode response np response(message,jakaï¿½ metoda sprawdxzajï¿½ca zwracajï¿½ca boolean(message))
     }
 
     public void onResponse(String message){
-        // sprawdzanie czy my trafiismy  i zmana trybu na nas³uch
+        // sprawdzanie czy my trafiismy  i zmana trybu na nasï¿½uch
     }
 
     public void request(String coordinates){
