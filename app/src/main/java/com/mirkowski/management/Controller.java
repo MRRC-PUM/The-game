@@ -1,12 +1,9 @@
 package com.mirkowski.management;
 
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.bartek.shipswar.ChoseConnectionTypeActivity;
 import com.example.bartek.shipswar.MainActivity;
 import com.example.bartek.shipswar.MapGameActivity;
 import com.example.bartek.shipswar.MapPlayActivity;
@@ -37,7 +34,7 @@ public class Controller {
     private boolean isOpponentReady = false;
     private boolean isEnableGmae = false;
     //kamil dodalem to
-       private boolean imHost = false;
+       private boolean imCurrentPlayer = false;
 
     //-----------------Activitys-----------------
        private MainActivity mainActivity = null;
@@ -201,7 +198,7 @@ public class Controller {
         // co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
         // co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
         this.game = game;// co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
-
+        game.setMode(imCurrentPlayer);
               ready();
 
     }
@@ -284,12 +281,13 @@ public class Controller {
         return this.game;
     }
 
-    public boolean isImHost() {
-                return imHost;
+    public boolean isImCurrentPlayer() {
+                return imCurrentPlayer;
             }
 
-        public void setImHost(boolean imHost) {
-                this.imHost = imHost;
+        public void setImCurrentPlayer(boolean imCurrentPlayer) {
+                this.imCurrentPlayer = imCurrentPlayer;
+
             }
 
 

@@ -5,13 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.bartek.shipswar.logic.Game;
 import com.mirkowski.management.Controller;
 
 
@@ -70,7 +66,7 @@ public class MapPlayActivity extends Activity {
 
 
     public void onClickButton(View view) {
-
+        if (controller.isImCurrentPlayer()) {
         int x=0, y=0;
         switch (view.getId()){
             case R.id.imageView00: x = 0; y = 0; break;
@@ -184,6 +180,11 @@ public class MapPlayActivity extends Activity {
             case R.id.imageView99: x = 9; y = 9; break;
         }
 
+
+            controller.request(""+x+""+y);
+
+
+        }
         //tu bierzesz x i y
 
     }

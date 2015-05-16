@@ -1,13 +1,9 @@
 package com.example.bartek.shipswar;
 
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,8 +14,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mirkowski.management.Controller;
-import com.mirkowski.websocketclient.WebSocketConnector;
-import com.mirkowski.websocketclient.Message;
 
 import java.util.List;
 
@@ -125,7 +119,7 @@ public class RoomGameActivity extends ActionBarActivity {
 
     public void invite(){
         getSelectedPlayer();
-        controller.setImHost(true);
+        controller.setImCurrentPlayer(true);
     }
 
     public void setLabelText(String text){

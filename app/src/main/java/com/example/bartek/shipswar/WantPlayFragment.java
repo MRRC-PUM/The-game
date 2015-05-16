@@ -1,11 +1,7 @@
 package com.example.bartek.shipswar;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DialogFragment;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.mirkowski.management.Controller;
-
-import org.w3c.dom.Text;
 
 
 public class WantPlayFragment extends DialogFragment implements View.OnClickListener{
@@ -46,7 +40,7 @@ public class WantPlayFragment extends DialogFragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.Yes) {
-            controller.setImHost(false);
+            controller.setImCurrentPlayer(false);
             controller.responseOnInviteToGame(true,name);
             dismiss();
         }

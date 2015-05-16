@@ -11,14 +11,14 @@ public class Game {
     boolean mode;
     final int SHOT = 9;
     final int LOSE = 8;
-    final public boolean listen = true;
-    final public boolean sending = false;
+
 
 
     public Game(int[][] owner, int ownerPoints) {
         this.owner = owner;
         this.ownerPoints = ownerPoints;
         this.opponentPoints = ownerPoints;
+
         for(int i = 0 ; i<=9 ; i++)
             for(int j = 0; j<=9; j++) opponent[j][i]=0;
     }

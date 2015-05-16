@@ -2,6 +2,9 @@ package com.example.bartek.shipswar.logic;
 
 import android.util.Log;
 
+import com.example.bartek.shipswar.MainActivity;
+import com.mirkowski.management.Controller;
+
 /**
  * Created by Bartek on 2015-04-30.
  */
@@ -14,6 +17,7 @@ public class GameFactory {
     Points pointsStart;
     Points pointsEnd;
     int[][] owner= new int[tablength][tablength];
+    private Controller controller = null;
 
     Ship ship_1 = new Ship("jednomasztowiec", 1);
     Ship ship_2 = new Ship("dwumasztowiec", 2);
@@ -29,6 +33,7 @@ public class GameFactory {
     public GameFactory() {
         for(int i =0; i < tablength; i++)
             for(int j=0; j < tablength; j++) owner[j][i] = nullsector;
+
     }
 
     public int[][] getOwner() {
