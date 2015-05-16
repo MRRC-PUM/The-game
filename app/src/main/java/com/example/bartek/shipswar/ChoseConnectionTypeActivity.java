@@ -1,18 +1,23 @@
 package com.example.bartek.shipswar;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.mirkowski.management.Controller;
+import com.mirkowski.management.connectionType.ConnectionType;
+
 
 public class ChoseConnectionTypeActivity extends ActionBarActivity {
-
+    private  Controller controller = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chose_connection_type);
+        controller = MainActivity.controller;
     }
 
 
@@ -39,5 +44,8 @@ public class ChoseConnectionTypeActivity extends ActionBarActivity {
     }
 
     public void onClickConnectionViaInternet(View view) {
+        controller.setConnectionManager(ConnectionType.Internet);
+        Intent intent = new Intent(this, RoomGameActivity.class);
+        startActivity(intent);
     }
 }

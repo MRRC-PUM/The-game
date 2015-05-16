@@ -25,12 +25,12 @@ import java.util.List;
 
 public class RoomGameActivity extends ActionBarActivity {
 
-    TextView messageView;
-    TextView viewInfo;
-    EditText textMessage;
-    Spinner spinner;
-    EditText userNeme;
-    Controller controller = null;
+    private TextView messageView;
+    private TextView viewInfo;
+    private EditText textMessage;
+    private Spinner spinner;
+    private EditText userNeme;
+    private Controller controller = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,6 @@ public class RoomGameActivity extends ActionBarActivity {
         
         controller.setRoomGameActivity(this);
        // setPlayersList(controller.getPlayersList());
-        Log.d("Controler",controller.toString());
         setContentView(R.layout.activity_room_game);
         viewInfo = (TextView) findViewById(R.id.textViewOtherPLayerWaiting);
         messageView = (TextView) findViewById(R.id.textMessageView);
@@ -111,9 +110,6 @@ public class RoomGameActivity extends ActionBarActivity {
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        Log.d("adapter", dataAdapter.toString());
-        Log.d("spiner", (spinner == null) ? "null" : "nie null");
-
         try {
             spinner.setAdapter(dataAdapter);
         }catch (Exception e){}

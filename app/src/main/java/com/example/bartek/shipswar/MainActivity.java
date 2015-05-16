@@ -20,8 +20,8 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        controller = new Controller();
-        controller.setMainActivity(this);
+        controller = new Controller(this);
+
     }
 
     public SharedPreferences getSharedPreferences(){
@@ -50,9 +50,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onClickButtonGraj(View view) {
-        Intent intent = new Intent(this, MapGameActivity.class);
-        //Intent intent = new Intent(this, RoomGameActivity.class);
-        //intent.putExtra("controler", (Parcelable) controller);
+        Intent intent = new Intent(this, ChoseConnectionTypeActivity.class);
         startActivity(intent);
     }
 

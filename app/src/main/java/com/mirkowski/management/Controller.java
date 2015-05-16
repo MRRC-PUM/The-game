@@ -4,7 +4,9 @@ package com.mirkowski.management;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.bartek.shipswar.ChoseConnectionTypeActivity;
 import com.example.bartek.shipswar.MainActivity;
 import com.example.bartek.shipswar.MapGameActivity;
 import com.example.bartek.shipswar.MapPlayActivity;
@@ -14,6 +16,7 @@ import com.example.bartek.shipswar.StatisticsActivity;
 import com.example.bartek.shipswar.logic.Game;
 import com.mirkowski.management.command.GameCommand;
 import com.mirkowski.management.command.SystemCommand;
+import com.mirkowski.management.connectionType.ConnectionType;
 import com.mirkowski.settings.Settings;
 import com.mirkowski.websocketclient.Message;
 import com.mirkowski.websocketclient.WebSocketConnector;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 /**
  * Created by Kamil on 2015-04-28.
  */
-public class Controller implements Parcelable {
+public class Controller {
 
     private Settings settings = new Settings();// ustawienia apki
     private ConnectionManager connectionManager = null;
@@ -43,15 +46,9 @@ public class Controller implements Parcelable {
        private MapPlayActivity mapPlayActivity = null;
     //-------------------------------
 
-    public void setMainActivity(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-        settings = new Settings(mainActivity.getSharedPreferences());
-    }
 
     public void setRoomGameActivity(RoomGameActivity roomGameActivity) {
         this.roomGameActivity = roomGameActivity;
-        Log.d("INFO",settings.getServerAdress());
-
     }
 
     public void setSettingsActivity(SettingsActivity settingsActivity) {
@@ -70,12 +67,21 @@ public class Controller implements Parcelable {
         this.mapPlayActivity = mapPlayActivity;
     }
     
-    public Controller(){
-
-//        this.connectionManager = new ConnectionManager(this,new WebSocketConnector("ws://192.168.2.100:8080/WebSocketGlassfish/chat"),settings.getUserName());
-        this.connectionManager = new ConnectionManager(this,new WebSocketConnector(settings.getServerAdress()),settings.getUserName());
+    public Controller(MainActivity mainActivity){
+        this.mainActivity = mainActivity;
+        settings = new Settings(mainActivity.getSharedPreferences());
     }
 
+    public void setConnectionManager(ConnectionType connectionType) {
+        switch (connectionType) {
+            case Internet:
+                this.connectionManager = new ConnectionManager(this,new WebSocketConnector(settings.getServerAdress()),settings.getUserName());
+                break;
+            case Bluetooth:
+                // nizioł
+                break;
+        }
+    }
 
     public void setOpponentName(String opponentName) {
         this.opponentName = opponentName;
@@ -87,9 +93,9 @@ public class Controller implements Parcelable {
 
     // metoda do wyswietlania info od servera
     public void viewInfo(String senderName, String message){
-        // dodaj metode do ustawienia textu na lebelu :)
         Log.d("INFO", message);
-//        roomGameActivity.setLabelText(senderName + " " + message);
+        if(roomGameActivity != null) roomGameActivity.setLabelText(senderName + " " + message);
+        else Toast.makeText(mainActivity.getApplicationContext(),message,Toast.LENGTH_LONG);
     }
 
 
@@ -180,6 +186,7 @@ public class Controller implements Parcelable {
     // metoda wywo�ywana przy zgodzie obu graczy na gre
     public void enableGame(){
         isEnableGmae = true;
+
         // ustaw button rozpocznij gre na enabled
         // i wywo�aj metode createGame();
         //room game
@@ -263,14 +270,5 @@ public class Controller implements Parcelable {
     }
 
 
-    // nadpisane
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-    }
 }
