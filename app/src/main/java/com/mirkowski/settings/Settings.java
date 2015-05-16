@@ -19,7 +19,7 @@ import org.xml.sax.SAXException;
 /**
  * Created by Kamil on 2015-04-30.
  */
-public class Settings { 
+public class Settings {
 
     private String userName = null;
     private String serverAdress = null;
