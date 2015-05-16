@@ -19,7 +19,7 @@ import org.xml.sax.SAXException;
 /**
  * Created by Kamil on 2015-04-30.
  */
-public class Settings {
+public class Settings { 
 
     private String userName = null;
     private String serverAdress = null;
@@ -60,6 +60,10 @@ public class Settings {
         return "ws://"+serverAdress+":8080/WebSocketGlassfish/chat";
     }
 
+    public String getServerIP() {
+        return serverAdress;
+    }
+
     public void setServerAdress(String serverAdress) {
         this.serverAdress = serverAdress;
         sharedEditor.putString("ServerAdress",serverAdress);
@@ -72,5 +76,13 @@ public class Settings {
     public void incrementDefeatCount(){
         defeatCount +=1;
         sharedEditor.putInt("DefeatCount",defeatCount);
+    }
+
+    public String getWinCount() {
+        return String.valueOf(winCount);
+    }
+
+    public String getDefeatCount() {
+        return String.valueOf(defeatCount);
     }
 }

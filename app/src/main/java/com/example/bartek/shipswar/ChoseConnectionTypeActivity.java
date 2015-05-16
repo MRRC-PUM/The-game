@@ -48,4 +48,11 @@ public class ChoseConnectionTypeActivity extends ActionBarActivity {
         Intent intent = new Intent(this, RoomGameActivity.class);
         startActivity(intent);
     }
+
+    public void onClickConnectionViaBluetooth(View view) {
+        //gdy nizio³ zrobi
+//        controller.setConnectionManager(ConnectionType.Bluetooth);
+//        Intent intent = new Intent(this, RoomGameActivity.class);
+//        startActivity(intent);
+    }
 }

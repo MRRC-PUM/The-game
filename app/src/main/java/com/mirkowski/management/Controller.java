@@ -1,6 +1,7 @@
 package com.mirkowski.management;
 
 
+import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -201,6 +202,7 @@ public class Controller {
 
     public void startTheGame(){
         // tu wstaw wszustko
+
     }
 
     public void endTheGame(SystemCommand result){
@@ -258,7 +260,10 @@ public class Controller {
 
     public void ready(){
         if(isOpponentReady)startTheGame();
-        else isReady = true;
+        else {
+            isReady = true;
+            connectionManager.sendMessage(new Message(settings.getUserName(),opponentName, GameCommand.Ready.toString(),settings.getUserName()));
+        }
     }
 
     public void changeServerAdress(String newSreverAdress){
@@ -269,6 +274,19 @@ public class Controller {
         settings.setUserName(newUserName);
     }
 
+    public String getServerAdress(){
+        return settings.getServerIP();
+    }
 
+    public String getUserName(){
+        return settings.getUserName();
+    }
 
+    public String getWinCount() {
+        return settings.getWinCount();
+    }
+
+    public String getDefeatCount() {
+        return settings.getDefeatCount();
+    }
 }

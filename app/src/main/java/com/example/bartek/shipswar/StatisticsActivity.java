@@ -4,14 +4,27 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.mirkowski.management.Controller;
 
 
 public class StatisticsActivity extends ActionBarActivity {
+
+    private Controller controller = null;
+    private TextView winCount = null;
+    private TextView defeatCount = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
+        controller = MainActivity.controller;
+        controller.setStatisticsActivity(this);
+        winCount = (TextView) findViewById(R.id.textViewWinners);
+        defeatCount = (TextView) findViewById(R.id.textViewLosses);
+        winCount.setText(controller.getWinCount());
+        defeatCount.setText(controller.getDefeatCount());
     }
 
 
