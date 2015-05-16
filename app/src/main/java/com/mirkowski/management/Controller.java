@@ -83,7 +83,7 @@ public class Controller implements Parcelable {
     public void viewInfo(String senderName, String message){
         // dodaj metode do ustawienia textu na lebelu :)
         Log.d("INFO", message);
-        roomGameActivity.setLabelText(senderName + " " + message);
+//        roomGameActivity.setLabelText(senderName + " " + message);
     }
 
 

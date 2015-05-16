@@ -42,6 +42,10 @@
             android:name=".MapPlayActivity"
             android:label="@string/title_activity_map_play" >
         </activity>
+        <activity
+            android:name=".ChoseConnectionTypeActivity"
+            android:label="@string/title_activity_chose_connection_type" >
+        </activity>
     </application>
 
 </manifest>

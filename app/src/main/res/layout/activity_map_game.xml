@@ -1224,15 +1224,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="zmien"
-            android:id="@+id/buttonChange"
-            android:layout_row="1"
-            android:layout_column="3"
-            android:onClick="onClickChange"/>
+
 
         <ImageView
             android:layout_width="wrap_content"
@@ -1240,13 +1232,14 @@
             android:layout_row="1"
             android:layout_column="1"/>
 
-        <TextView
-            android:text="Gracz"
-            android:layout_row="1"
-            android:layout_column="2"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:id="@+id/texViewCurrentPlayer"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Graj"
+            android:onClick="onClickStartGame"
+            android:layout_row="2"
+            android:layout_column="1"
+            />
 
         </GridLayout>
 
