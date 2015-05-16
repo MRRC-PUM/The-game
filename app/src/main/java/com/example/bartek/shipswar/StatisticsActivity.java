@@ -23,8 +23,8 @@ public class StatisticsActivity extends ActionBarActivity {
         controller.setStatisticsActivity(this);
         winCount = (TextView) findViewById(R.id.textViewWinners);
         defeatCount = (TextView) findViewById(R.id.textViewLosses);
-        winCount.setText(controller.getWinCount());
-        defeatCount.setText(controller.getDefeatCount());
+       // winCount.setText(controller.getWinCount());
+       // defeatCount.setText(controller.getDefeatCount());
     }
 
 

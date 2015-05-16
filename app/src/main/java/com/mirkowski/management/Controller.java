@@ -36,6 +36,8 @@ public class Controller {
     private boolean isReady = false;
     private boolean isOpponentReady = false;
     private boolean isEnableGmae = false;
+    //kamil dodalem to
+       private boolean imHost = false;
 
     //-----------------Activitys-----------------
        private MainActivity mainActivity = null;
@@ -186,18 +188,22 @@ public class Controller {
     // metoda wywo�ywana przy zgodzie obu graczy na gre
     public void enableGame(){
         isEnableGmae = true;
-
+        roomGameActivity.setEnabled(true);
         // ustaw button rozpocznij gre na enabled
         // i wywo�aj metode createGame();
         //room game
         
     }
 
-    public void createGame(){
+    public void createGame(Game game){
         // create nowy obiekt game
 
+        // co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
+        // co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
+        this.game = game;// co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
 
-        ready();
+              ready();
+
     }
 
     public void startTheGame(){
@@ -260,7 +266,10 @@ public class Controller {
 
     public void ready(){
         if(isOpponentReady)startTheGame();
-        else isReady = true;
+        else {
+                        isReady = true;
+                        connectionManager.sendMessage(new Message(settings.getUserName(),opponentName, GameCommand.Ready.toString(),settings.getUserName()));
+                    }
     }
 
     public void changeServerAdress(String newSreverAdress){
@@ -275,7 +284,34 @@ public class Controller {
         return this.game;
     }
 
+    public boolean isImHost() {
+                return imHost;
+            }
+
+        public void setImHost(boolean imHost) {
+                this.imHost = imHost;
+            }
 
 
+    public String getServerAdress(){
+                return settings.getServerIP();
+            }
+
+                public String getUserName(){
+                return settings.getUserName();
+            }
+
+        public String getWinCount() {
+                return settings.getWinCount();
+            }
+
+        public String getDefeatCount() {
+                return settings.getDefeatCount();
+            }
 
 }
+
+
+
+
+
