@@ -1,7 +1,6 @@
 package com.mirkowski.management;
 
 
-import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -37,9 +36,6 @@ public class Controller {
     private boolean isReady = false;
     private boolean isOpponentReady = false;
     private boolean isEnableGmae = false;
-
-    //kamil dodalem to
-    private boolean imHost = false;
 
     //-----------------Activitys-----------------
        private MainActivity mainActivity = null;
@@ -190,19 +186,21 @@ public class Controller {
     // metoda wywo�ywana przy zgodzie obu graczy na gre
     public void enableGame(){
         isEnableGmae = true;
-        roomGameActivity.setEnabled(true);// ustaw button rozpocznij gre na enabled
 
+        // ustaw button rozpocznij gre na enabled
+        // i wywo�aj metode createGame();
+        //room game
+        
     }
 
-    public void createGame(Game game){
+    public void createGame(){
         // create nowy obiekt game
-        this.game = game;// co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
-        ready();// jek stowrzysz to wywao�aj metode ready()
+        // game = gameFactory.createGame() // co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
+        // jek stowrzysz to wywao�aj metode ready()
     }
 
     public void startTheGame(){
         // tu wstaw wszustko
-       mapGameActivity.startMapGameActivity();
     }
 
     public void endTheGame(SystemCommand result){
@@ -271,15 +269,6 @@ public class Controller {
         settings.setUserName(newUserName);
     }
 
-    public boolean isImHost() {
-        return imHost;
-    }
 
-    public void setImHost(boolean imHost) {
-        this.imHost = imHost;
-    }
 
-    public Game getGame(){
-        return this.game;
-    }
 }

@@ -5,14 +5,29 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+
+import com.mirkowski.management.Controller;
 
 
 public class SettingsActivity extends ActionBarActivity {
 
+    private Controller controller = null;
+    private EditText userName = null;
+    private EditText serverAdress = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        controller = MainActivity.controller;
+        controller.setSettingsActivity(this);
+
+        userName = (EditText) findViewById(R.id.userName);
+        serverAdress = (EditText) findViewById(R.id.serverAdress);
+
+        userName.setText(controller.getUserName());
+        serverAdress.setText(controller.getServerAdress());
+
     }
 
 
@@ -38,18 +53,11 @@ public class SettingsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //<-
-    public void displaySettings(){
-        //controler.getSettings();
-    }
+    public void save(View view) {
+        if(!serverAdress.getText().toString().equals("") && !controller.getServerAdress().equals(serverAdress.getText().toString()))
+            controller.changeServerAdress(serverAdress.getText().toString());
 
-    //->
-    public void setIPAdress(View view){
-        //controler.setSettingIPAdress(name.getTekst().toString());
-    }
-
-    //->
-    public void setUserName(View view){
-        //controler.setSettingUserName(name.getTekst().toString());
+        if(!userName.getText().toString().equals("") && !controller.getServerAdress().equals(userName.getText().toString()))
+            controller.changeUserName(userName.getText().toString());
     }
 }

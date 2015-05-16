@@ -61,7 +61,6 @@ public class MainActivity extends ActionBarActivity {
 
     public void onClickButtonStatystyki(View view) {
         Intent intent = new Intent(this, StatisticsActivity.class);
-
         startActivity(intent);
     }
 
@@ -69,13 +68,4 @@ public class MainActivity extends ActionBarActivity {
         System.exit(0);
     }
 
-    //po rozmowie
-    private void createControler(Activity owner){
-        //Controler controler = new Controler(owner);
-    }
-
-    //public Controler getControler(){
-    //
-    //   return ;
-    //}
 }

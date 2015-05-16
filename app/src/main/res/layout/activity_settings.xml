@@ -32,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Wprowadz nazwe użytkownika"
+        android:id="@+id/userName"
         android:textSize="20dp" android:gravity="center"/>
     <Space
         android:layout_width="match_parent"
@@ -50,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Wprowadz adres serwera"
+        android:id="@+id/serverAdress"
         android:textSize="20dp" android:gravity="center"/>
 
     <Space
@@ -63,6 +65,7 @@
         android:layout_height="wrap_content"
         android:text="Zapisz"
         android:textSize="20dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:onClick="save"/>
 
 </LinearLayout>
