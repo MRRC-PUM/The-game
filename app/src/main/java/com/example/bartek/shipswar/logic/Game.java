@@ -15,11 +15,12 @@ public class Game {
     final public boolean sending = false;
 
 
-    public Game(int[][] owner, int[][] opponent, int ownerPoints, int opponentPoints) {
+    public Game(int[][] owner, int ownerPoints) {
         this.owner = owner;
-        this.opponent = opponent;
         this.ownerPoints = ownerPoints;
-        this.opponentPoints = opponentPoints;
+        this.opponentPoints = ownerPoints;
+        for(int i = 0 ; i<=9 ; i++)
+            for(int j = 0; j<=9; j++) opponent[j][i]=0;
     }
 
     public int[][] getOwner() {

@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.example.bartek.shipswar.MainActivity;
 import com.example.bartek.shipswar.MapGameActivity;
+import com.example.bartek.shipswar.MapPlayActivity;
 import com.example.bartek.shipswar.RoomGameActivity;
 import com.example.bartek.shipswar.SettingsActivity;
 import com.example.bartek.shipswar.StatisticsActivity;
@@ -39,6 +40,7 @@ public class Controller implements Parcelable {
        private SettingsActivity settingsActivity = null;
        private StatisticsActivity statisticsActivity = null;
        private MapGameActivity mapGameActivity = null;
+       private MapPlayActivity mapPlayActivity = null;
     //-------------------------------
 
     public void setMainActivity(MainActivity mainActivity) {
@@ -64,6 +66,10 @@ public class Controller implements Parcelable {
         this.mapGameActivity = mapGameActivity;
     }
 
+    public void setMapPlayActivity(MapPlayActivity mapPlayActivity){
+        this.mapPlayActivity = mapPlayActivity;
+    }
+    
     public Controller(){
 
 //        this.connectionManager = new ConnectionManager(this,new WebSocketConnector("ws://192.168.2.100:8080/WebSocketGlassfish/chat"),settings.getUserName());
@@ -176,6 +182,8 @@ public class Controller implements Parcelable {
         isEnableGmae = true;
         // ustaw button rozpocznij gre na enabled
         // i wywo�aj metode createGame();
+        //room game
+        
     }
 
     public void createGame(){

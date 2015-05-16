@@ -8,7 +8,7 @@ import android.util.Log;
 public class GameFactory {
 
     int playerpoints;
-
+    String comunicate = "";
     final int tablength = 10;
     final int nullsector = 0;
     Points pointsStart;
@@ -20,10 +20,10 @@ public class GameFactory {
     Ship ship_3 = new Ship("trojmasztowiec", 3);
     Ship ship_4 = new Ship("czteromasztowiec", 4);
     Ship[] ships = {ship_1,ship_1,ship_1,ship_2,ship_3,ship_4};
-    final int HowMuchShips = ships.length;
-    final int points = 7;//(iles punktow koncowych i poczatkowych statkwo >1 maszt)+(ilosc 1 masztowcw)
+    final int HowMuchShips = ships.length-1;
+    final int points = 3*ship_1.getPoints()+ship_2.getPoints()+ship_3.getPoints()+ship_4.getPoints();//(iles punktow koncowych i poczatkowych statkwo >1 maszt)+(ilosc 1 masztowcw)
     int pointsSettedPoints=1;
-    int iterate = 4;
+    int iterate = HowMuchShips;
 
 
     public GameFactory() {
@@ -54,17 +54,12 @@ public class GameFactory {
                     pointsEnd = new Points(x,y);
                     pointsSettedPoints++;
                     Log.d("GameFactory", "Wielomasztowiec Stawiam drugi punkt");
-                    //sprawdzanie czy mozna postawic statek
-               /* if(checkMultiplayOwner(pointsStart, pointsEnd)){
-                    if(chechOnLineOwner(pointsStart, pointsEnd)){
-                        setOnLineInOwner(pointsStart, pointsEnd);
-                    } else iterate++;
-                }else iterate++;
-                */
+                    comunicate="Ustaw poprawnie statek";
                     if(checkMultiplayOwner(pointsStart,pointsEnd)) {
                         if(chechOnLineOwner(pointsStart, pointsEnd)) {
                             setOnLineInOwner(pointsStart, pointsEnd);
-                        } else iterate+=2;
+                            comunicate="";
+                        } else iterate+=1;
                     }
 
 
@@ -75,9 +70,11 @@ public class GameFactory {
                 }
 
             } else {
+                comunicate="Ustaw poprawnie statek";
                 if (checkOwner(x,y)){
                     Log.d("GameFacotry", "jednomasztowiec");
                     setOnOwnerOne(x,y);
+                    comunicate="";
                     if(iterate!=0)
                         iterate--;
                 }
@@ -131,7 +128,7 @@ public class GameFactory {
                 if(((end.getY()-start.getY())+1)==ships[iterate].getPoints()){
                     Log.d("GameFactory", "Poprawnie ustawiono1");
                     return true;
-                } else{ Log.d("GameFactory", "bledni ustawiono1");return false;}
+                } else{ Log.d("GameFactory", "bledni ustawiono1");iterate++;return false;}
             }
             if(whose==2){
                 if(start.getX() > end.getX()){
@@ -141,11 +138,13 @@ public class GameFactory {
                 }
                 if(((end.getX()-start.getX())+1)==ships[iterate].getPoints()){
                     Log.d("GameFactory", "Poprawnie ustawiono2"); return true;
-                }else {Log.d("GameFactory", "bledni ustawiono2");return false;}
+                }else {Log.d("GameFactory", "bledni ustawiono2");iterate++;return false;}
             }
         } else return false;//jesli nie jest ani poziomo ani pionowo
 
         Log.d("GameFactory", "zwykle ok");
+
+        //sprawdzanie czy nic nie stoji na drodze statku
         return true;
     }
 
@@ -159,29 +158,73 @@ public class GameFactory {
 
         for (int i =local.getX(); i<=local.getY();i++){
             if (ships[iterate].getOrientation()) {
-                if(owner[i][constatns]==1 || owner[i][constatns]==2) return false;
+                if(owner[constatns][i]==1 || owner[constatns][i]==2){ iterate++;return false;}
             } else {
-                if(owner[constatns][i]==1 || owner[constatns][i]==2) return false;
+                if(owner[i][constatns]==1 || owner[i][constatns]==2) {iterate++; return false;}
             }
         }
 
         return true;
     }
-//BARTEK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PAMIETAJ BY DODAC TU KONTROLE ODSTEPU
-//Zostawione przez Rybak dla RYbak nie kasowac dopuki nei zrobie!!!
-
 
     private void setOnLineInOwner(Points start, Points end){
         if (ships[iterate].getOrientation()){
+            //ver
             for (int i = start.getY(); i<=end.getY(); i++){
+
                 owner[start.getX()][i]=2;
+
+
+
+                if ((i == start.getY()) &&(i>0)){
+                    if(start.getX()>0)
+                    owner[start.getX()-1][i-1]=1;
+                    owner[start.getX()][i-1]=1;
+                    if(start.getX()<9) owner[start.getX()+1][i-1]=1;
+                }
+
+                if ((i == end.getY()) &&(i<9)){
+                    if(end.getX()>0)
+                        owner[end.getX()-1][i+1]=1;
+                    owner[end.getX()][i+1]=1;
+                    if(end.getX()<9) owner[end.getX()+1][i+1]=1;
+                }
+
+                if ((i>start.getY()-1 && i<end.getY()+1)){
+                    if (start.getX()>0)  owner[start.getX()-1][i]=1;
+                    if (end.getX()<9) owner[start.getX()+1][i]=1;
+
+                }
+
+
 
                 //narazie nei daje wstawiania odstepu poprostu z braku czasu
             }
         } else {
             for (int i = start.getX(); i<=end.getX(); i++){
                 owner[i][start.getY()]=2;
-                Log.d("hor", "Y: " + String.valueOf(start.getY()) + " X: " + String.valueOf(start.getX()));
+
+
+                if ((i == start.getX()) &&(i>0)){
+                    if(start.getY()>0)
+                        owner[i-1][start.getY()-1]=1;
+                    owner[i-1][start.getY()]=1;
+                    if(start.getY()<9) owner[i-1][start.getY()+1]=1;
+                }
+
+                if ((i == end.getX()) &&(i<9)){
+                    if(end.getY()>0)
+                        owner[i+1][end.getY()-1]=1;
+                    owner[i+1][end.getY()]=1;
+                    if(end.getY()<9) owner[i+1][end.getY()+1]=1;
+                }
+
+                if ((i>start.getX()-1 && i<end.getX()+1)){
+                    if (start.getY()>0)  owner[i][start.getY()-1]=1;
+                    if (end.getY()<9) owner[i][start.getY()+1]=1;
+
+                }
+
                 //narazie nei daje wstawiania odstepu poprostu z braku czasu
             }
 
@@ -192,5 +235,18 @@ public class GameFactory {
         return ships[iterate].getType();
     }
 
+    public Game returnGame(){
+        Game game = new Game(getOwner(),getPoints());
+        return game;
+    }
+
+    public boolean CheckIterate(){
+        if (this.iterate==0) return true;//jesli bedzie sie rownal 0 to uruchamiac returnGame
+        else return false;
+    }
+
+    public String getComunicate(){
+        return this.comunicate;
+    }
 
 }

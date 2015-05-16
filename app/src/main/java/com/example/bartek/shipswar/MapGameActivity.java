@@ -18,10 +18,13 @@ public class MapGameActivity extends ActionBarActivity {
     GameFactory gameFactory = new GameFactory();
     int currentCell=-1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_game);
+        display(gameFactory.getOwner());
+
     }
 
 
@@ -188,23 +191,30 @@ public class MapGameActivity extends ActionBarActivity {
         display(gameFactory.getOwner());
         Log.d("MapGameActivity", "display: succes");
 
+        if(gameFactory.CheckIterate()){
+
+        }
+
 
     }
 
 
 
     public void display(int[][] tab) {
+        int currentCell = R.id.imageView00;
+        for (int i = 0; i<tab.length; i++)
+            for (int j = 0; j<tab.length; j++) {
+                ImageView pole = (ImageView) findViewById(currentCell+j+10*i);
 
-        if(currentCell==-1 || currentCell == R.id.imageView99) { currentCell = R.id.imageView00;}
-        for (int i = 0; i<9; i++)
-           for (int j = 0; j<9; j++) {
-               ImageView pole = (ImageView) findViewById(currentCell++);
-               if (tab[j][i]==0) pole.setBackgroundColor(0xFF0000); // to bedzie jak beda grafiki... pole.setImageBitmap(Bitmap bm);
-               else if (tab[j][i]==1) pole.setBackgroundColor(0xFF0011);//gdy obok statku
-               else if (tab[j][i]==2) pole.setBackgroundColor(0xFF00FF);//gdy statek\
+                if (tab[j][i]==0) pole.setBackgroundColor(0xff000000+(j+i)<<4); // czarny to bedzie jak beda grafiki... pole.setImageBitmap(Bitmap bm);
+                else if (tab[j][i]==1) pole.setBackgroundColor(0xff0000ff);//niebieski gdy obok statku
+                else if (tab[j][i]==2) pole.setBackgroundColor(0xffff0000);// czerwony gdy statek\
 
-           }
-
+            }
+        TextView ShipTextView = (TextView) findViewById(R.id.ShipsTextView);
+        ShipTextView.setText(gameFactory.getActualShip());
+        TextView CommunikateTextView = (TextView) findViewById(R.id.Communicate);
+        CommunikateTextView.setText(gameFactory.getComunicate());
     }
 
     public void changeView(){

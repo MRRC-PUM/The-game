@@ -155,7 +155,7 @@
             android:background="#661199"
             android:minHeight="30dp"
             android:minWidth="30dp"
-            android:onClick="buttonOnClick"
+            android:onClick="onClickButton"
             android:layout_alignTop="@+id/imageView01"
             android:layout_toRightOf="@+id/imageView01"
             android:layout_toEndOf="@+id/imageView01" />
@@ -1237,10 +1237,20 @@
             android:layout_height="wrap_content"
             android:text="Graj"
             android:onClick="onClickStartGame"
-            android:layout_row="2"
-            android:layout_column="1"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_gravity="right"
             />
 
+        <TextView
+            android:id="@+id/ShipsTextView"
+            android:layout_row="2"
+            android:layout_column="1"/>
+        <TextView
+            android:id="@+id/Communicate"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_gravity="right"/>
         </GridLayout>
 
 </LinearLayout>
