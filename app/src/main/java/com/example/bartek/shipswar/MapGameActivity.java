@@ -27,14 +27,13 @@ public class MapGameActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //controller = MainActivity.controller;
         setContentView(R.layout.activity_map_game);
+        controller = MainActivity.controller;
+        controller.setMapGameActivity(this);
 
 
-
-buttons = (Button) findViewById(R.id.startgame);
+        buttons = (Button) findViewById(R.id.startgame);
         display(gameFactory.getOwner());
-
         buttons.setEnabled(false);
 
     }
@@ -228,12 +227,12 @@ buttons = (Button) findViewById(R.id.startgame);
 
     public void onClickStartGame(View view) {
         if(gameFactory.CheckIterate()) {
-            // controller.createGame(gameFactory.returnGame());
+             controller.createGame(gameFactory.returnGame());
         } else Toast.makeText(this, "ustaw wszystkie statki", Toast.LENGTH_SHORT).show();
 
     }
 
-    public void startMapGameActivity(){
+    public void startMapPlayActivity(){
         Intent intent = new Intent(this, MapPlayActivity.class);
         startActivity(intent);
 

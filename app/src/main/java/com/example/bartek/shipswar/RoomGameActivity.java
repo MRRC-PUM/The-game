@@ -40,22 +40,9 @@ public class RoomGameActivity extends ActionBarActivity {
         textMessage = (EditText) findViewById(R.id.editMessage);
         spinner = (Spinner) findViewById(R.id.spinner);
         userNeme = (EditText) findViewById(R.id.editUserName);
-
-//
-//        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-//// Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-//                        R.array.players_test_names, android.R.layout.simple_spinner_item);
-//// Specify the layout to use when the list of choices appears
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//// Apply the adapter to the spinner
-//        spinner.setAdapter(adapter);
-
-
+        setEnabled(false);
     }
-//    public SharedPreferences getSharedPreferences(){
-//        return getSharedPreferences("com.mirkowski.settings", Context.MODE_PRIVATE);
-//    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

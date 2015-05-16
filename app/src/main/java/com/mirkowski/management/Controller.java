@@ -33,8 +33,7 @@ public class Controller {
     private boolean isReady = false;
     private boolean isOpponentReady = false;
     private boolean isEnableGmae = false;
-    //kamil dodalem to
-       private boolean imCurrentPlayer = false;
+    private boolean imCurrentPlayer = false;
 
     //-----------------Activitys-----------------
        private MainActivity mainActivity = null;
@@ -94,7 +93,7 @@ public class Controller {
     public void viewInfo(String senderName, String message){
         Log.d("INFO", message);
         if(roomGameActivity != null) roomGameActivity.setLabelText(senderName + " " + message);
-        else Toast.makeText(mainActivity.getApplicationContext(),message,Toast.LENGTH_LONG);
+        else Toast.makeText(mainActivity.getApplicationContext(),message,Toast.LENGTH_LONG).show();
     }
 
 
@@ -149,6 +148,7 @@ public class Controller {
                 isOpponentReady = false;
                 isReady = false;
                 isEnableGmae =false;
+                imCurrentPlayer = false;
             } else {
                 connectionManager.close();
                 game =null;
@@ -156,6 +156,7 @@ public class Controller {
                 isOpponentReady = false;
                 isReady = false;
                 isEnableGmae =false;
+                imCurrentPlayer = false;
             }
         } else if(opponentName != null && isEnableGmae){
             connectionManager.close();
@@ -164,6 +165,7 @@ public class Controller {
             isOpponentReady = false;
             isReady = false;
             isEnableGmae =false;
+            imCurrentPlayer = false;
         } else if(opponentName != null ){
             connectionManager.sendMessage(new Message(settings.getUserName(),"System",SystemCommand.LongTimeWaitingForPlayer.toString(),opponentName));
             game =null;
@@ -171,6 +173,7 @@ public class Controller {
             isOpponentReady = false;
             isReady = false;
             isEnableGmae =false;
+            imCurrentPlayer = false;
         }
     }
 
@@ -180,32 +183,23 @@ public class Controller {
         isOpponentReady = false;
         isReady = false;
         isEnableGmae = false;
+        imCurrentPlayer = false;
     }
 
     // metoda wywo�ywana przy zgodzie obu graczy na gre
     public void enableGame(){
         isEnableGmae = true;
         roomGameActivity.setEnabled(true);
-        // ustaw button rozpocznij gre na enabled
-        // i wywo�aj metode createGame();
-        //room game
-        
     }
 
     public void createGame(Game game){
-        // create nowy obiekt game
-
-        // co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
-        // co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
-        this.game = game;// co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
+        this.game = game;
         game.setMode(imCurrentPlayer);
-              ready();
-
+        ready();
     }
 
     public void startTheGame(){
-        // tu wstaw wszustko
-        mapGameActivity.startMapGameActivity();
+        mapGameActivity.startMapPlayActivity();
     }
 
     public void endTheGame(SystemCommand result){
@@ -239,18 +233,19 @@ public class Controller {
 
     }
     public void onRequest(String message){
-        // sprawdzanie czy przeciwnik trafi� , wys�anie responsa i zmaian trybu z nas�uchu na nadawanie
-        // masz do wys�ana metode response np response(message,jaka� metoda sprawdxzaj�ca zwracaj�ca boolean(message))
+        response(message,game.opponentShot(Integer.valueOf(message.charAt(0)),Integer.valueOf(message.charAt(0))));
+        mapPlayActivity.display(game.getOwner());
+        imCurrentPlayer = true;
     }
 
     public void onResponse(String message){
-        // sprawdzanie czy my trafiismy  i zmana trybu na nas�uch
+        game.setShotOpponentMap(Integer.valueOf(message.charAt(0)),Integer.valueOf(message.charAt(1)),Integer.valueOf(message.charAt(2)));
+        mapPlayActivity.display(game.getOwner());
+        imCurrentPlayer = false;
     }
 
     public void request(String coordinates){
-        if(game != null){
-            connectionManager.sendMessage(new Message(settings.getUserName(),opponentName, GameCommand.GameRequest.toString(),coordinates));
-        }
+        connectionManager.sendMessage(new Message(settings.getUserName(),opponentName, GameCommand.GameRequest.toString(),coordinates));
     }
 
     public void response(String coordinates,boolean result){
@@ -264,9 +259,9 @@ public class Controller {
     public void ready(){
         if(isOpponentReady)startTheGame();
         else {
-                        isReady = true;
-                        connectionManager.sendMessage(new Message(settings.getUserName(),opponentName, GameCommand.Ready.toString(),settings.getUserName()));
-                    }
+            isReady = true;
+            connectionManager.sendMessage(new Message(settings.getUserName(),opponentName, GameCommand.Ready.toString(),settings.getUserName()));
+        }
     }
 
     public void changeServerAdress(String newSreverAdress){
@@ -285,25 +280,22 @@ public class Controller {
                 return imCurrentPlayer;
             }
 
-        public void setImCurrentPlayer(boolean imCurrentPlayer) {
+    public void setImCurrentPlayer(boolean imCurrentPlayer) {
                 this.imCurrentPlayer = imCurrentPlayer;
-
-            }
+    }
 
 
     public String getServerAdress(){
                 return settings.getServerIP();
-            }
+    }
 
-                public String getUserName(){
+    public String getUserName(){
                 return settings.getUserName();
-            }
+    }
 
-        public String getWinCount() {
-                return settings.getWinCount();
-            }
+    public String getWinCount() {return settings.getWinCount();}
 
-        public String getDefeatCount() {
+    public String getDefeatCount() {
                 return settings.getDefeatCount();
             }
 

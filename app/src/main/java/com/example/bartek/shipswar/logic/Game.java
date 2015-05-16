@@ -68,7 +68,7 @@ public class Game {
       if (status==0) opponent[x][y]=LOSE;
     }
 
-    public boolean OpponentShot (int x, int y) {
+    public boolean opponentShot (int x, int y) {
         if (owner[x][y]==2) { owner[x][y] = SHOT; return true;}
         else {owner[x][y] = LOSE; return false;}
     }

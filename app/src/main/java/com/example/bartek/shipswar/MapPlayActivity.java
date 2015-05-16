@@ -20,7 +20,8 @@ public class MapPlayActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_play);
-        //controller = MainActivity.controller;
+        controller = MainActivity.controller;
+        controller.setMapPlayActivity(this);
 
 
     }
@@ -185,7 +186,7 @@ public class MapPlayActivity extends Activity {
 
 
         }
-        //tu bierzesz x i y
+
 
     }
 
