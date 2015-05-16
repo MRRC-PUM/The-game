@@ -195,12 +195,14 @@ public class Controller {
 
     public void createGame(){
         // create nowy obiekt game
-        // game = gameFactory.createGame() // co� takiego uchwyt do game juz jest w deklaracjach zmiennych klasy
-        // jek stowrzysz to wywao�aj metode ready()
+
+
+        ready();
     }
 
     public void startTheGame(){
         // tu wstaw wszustko
+        mapGameActivity.startMapGameActivity();
     }
 
     public void endTheGame(SystemCommand result){
@@ -268,6 +270,11 @@ public class Controller {
     public void changeUserName(String newUserName){
         settings.setUserName(newUserName);
     }
+
+    public Game getGame(){
+        return this.game;
+    }
+
 
 
 
