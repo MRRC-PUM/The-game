@@ -46,7 +46,7 @@ public class WantPlayFragment extends DialogFragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.Yes) {
-
+            controller.setImHost(false);
             controller.responseOnInviteToGame(true,name);
             dismiss();
         }

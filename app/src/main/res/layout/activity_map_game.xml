@@ -1233,6 +1233,7 @@
             android:layout_column="1"/>
 
         <Button
+            android:id="@+id/startgame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Graj"
@@ -1252,5 +1253,6 @@
             android:layout_column="2"
             android:layout_gravity="right"/>
         </GridLayout>
+
 
 </LinearLayout>

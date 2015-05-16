@@ -1,29 +1,41 @@
 package com.example.bartek.shipswar;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bartek.shipswar.logic.Game;
 import com.example.bartek.shipswar.logic.GameFactory;
+import com.mirkowski.management.Controller;
 
 
 public class MapGameActivity extends ActionBarActivity {
 
     GameFactory gameFactory = new GameFactory();
     int currentCell=-1;
-
+    private Controller controller = null;
+    Button buttons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //controller = MainActivity.controller;
         setContentView(R.layout.activity_map_game);
+
+
+
+buttons = (Button) findViewById(R.id.startgame);
         display(gameFactory.getOwner());
+
+        buttons.setEnabled(false);
 
     }
 
@@ -54,16 +66,7 @@ public class MapGameActivity extends ActionBarActivity {
 
 
 
-    //po rozmowie
-    public void setOwnerNameLabel(String NAME){
-        TextView textView = (TextView) findViewById(R.id.texViewCurrentPlayer);
-        textView.setText(NAME);
-    }
 
-    public void setOpponentNameLabel(String NAME){
-        TextView textView = (TextView) findViewById(R.id.texViewCurrentPlayer);
-        textView.setText(NAME);
-    }
 
     public void setMode(String NAME){
     }
@@ -184,16 +187,19 @@ public class MapGameActivity extends ActionBarActivity {
 
 
         }
-
-        Log.d("MapGameActivity", "Kliknieto X: " + x + " Y: " + y);
-        gameFactory.CreateGame(x, y);
-        Log.d("MapGameActivity", "gameFactory.CreateGame: succes");
-        display(gameFactory.getOwner());
-        Log.d("MapGameActivity", "display: succes");
-
         if(gameFactory.CheckIterate()){
+            buttons.setEnabled(true);
+            Toast.makeText(this, "Czyż nie ustawiles już wszystkich statków? ;) ", Toast.LENGTH_SHORT).show();
+        } else {
 
+            Log.d("MapGameActivity", "Kliknieto X: " + x + " Y: " + y);
+            gameFactory.CreateGame(x, y);
+            Log.d("MapGameActivity", "gameFactory.CreateGame: succes");
+            display(gameFactory.getOwner());
+            Log.d("MapGameActivity", "display: succes");
         }
+
+
 
 
     }
@@ -220,8 +226,16 @@ public class MapGameActivity extends ActionBarActivity {
     public void changeView(){
     }
 
-
     public void onClickStartGame(View view) {
+        if(gameFactory.CheckIterate()) {
+            // controller.createGame(gameFactory.returnGame());
+        } else Toast.makeText(this, "ustaw wszystkie statki", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void startMapGameActivity(){
+        Intent intent = new Intent(this, MapPlayActivity.class);
+        startActivity(intent);
 
     }
 }

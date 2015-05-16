@@ -50,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onClickButtonGraj(View view) {
-        Intent intent = new Intent(this, ChoseConnectionTypeActivity.class);
+        Intent intent = new Intent(this, MapPlayActivity.class);
         startActivity(intent);
     }
 
