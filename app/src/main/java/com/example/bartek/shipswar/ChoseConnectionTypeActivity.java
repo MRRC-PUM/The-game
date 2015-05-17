@@ -1,5 +1,6 @@
 package com.example.bartek.shipswar;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import com.mirkowski.management.Controller;
 import com.mirkowski.management.connectionType.ConnectionType;
 
 
-public class ChoseConnectionTypeActivity extends ActionBarActivity {
+public class ChoseConnectionTypeActivity extends Activity {
     private  Controller controller = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class ChoseConnectionTypeActivity extends ActionBarActivity {
     }
 
     public void onClickConnectionViaBluetooth(View view) {
-        //gdy nizio³ zrobi
+        //gdy nizioï¿½ zrobi
 //        controller.setConnectionManager(ConnectionType.Bluetooth);
 //        Intent intent = new Intent(this, RoomGameActivity.class);
 //        startActivity(intent);

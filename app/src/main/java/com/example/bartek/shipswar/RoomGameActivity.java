@@ -1,5 +1,6 @@
 package com.example.bartek.shipswar;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -18,7 +19,7 @@ import com.mirkowski.management.Controller;
 import java.util.List;
 
 
-public class RoomGameActivity extends ActionBarActivity {
+public class RoomGameActivity extends Activity {
 
     private TextView messageView;
     private TextView viewInfo;

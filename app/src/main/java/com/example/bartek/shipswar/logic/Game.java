@@ -5,7 +5,7 @@ package com.example.bartek.shipswar.logic;
  */
 public class Game {
     int[][] owner;
-    int[][] opponent;
+    int[][] opponent = {{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0}};
     int ownerPoints;
     int opponentPoints;
     boolean mode;
@@ -19,8 +19,8 @@ public class Game {
         this.ownerPoints = ownerPoints;
         this.opponentPoints = ownerPoints;
 
-        for(int i = 0 ; i<=9 ; i++)
-            for(int j = 0; j<=9; j++) opponent[j][i]=0;
+        //for(int i = 0 ; i<=9 ; i++)
+          //  for(int j = 0; j<=9; j++) opponent[j][i]=0;
     }
 
     public int[][] getOwner() {

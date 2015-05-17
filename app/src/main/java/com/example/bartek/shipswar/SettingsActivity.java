@@ -1,5 +1,6 @@
 package com.example.bartek.shipswar;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,7 +11,7 @@ import android.widget.EditText;
 import com.mirkowski.management.Controller;
 
 
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends Activity {
 
     private Controller controller = null;
     private EditText userName = null;

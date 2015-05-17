@@ -1,5 +1,6 @@
 package com.example.bartek.shipswar;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 import com.mirkowski.management.Controller;
 
 
-public class StatisticsActivity extends ActionBarActivity {
+public class StatisticsActivity extends Activity {
 
     private Controller controller = null;
     private TextView winCount = null;

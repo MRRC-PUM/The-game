@@ -14,7 +14,7 @@ import android.view.View;
 import com.mirkowski.management.Controller;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
     protected static Controller controller = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onClickButtonGraj(View view) {
-        Intent intent = new Intent(this, ChoseConnectionTypeActivity.class);
+        Intent intent = new Intent(this, MapGameActivity.class);
+        //Intent intent = new Intent(this, ChoseConnectionTypeActivity.class);
         startActivity(intent);
     }
 

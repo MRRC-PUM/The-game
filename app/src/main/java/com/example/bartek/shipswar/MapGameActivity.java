@@ -1,5 +1,6 @@
 package com.example.bartek.shipswar;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import com.example.bartek.shipswar.logic.GameFactory;
 import com.mirkowski.management.Controller;
 
 
-public class MapGameActivity extends ActionBarActivity {
+public class MapGameActivity extends Activity {
 
     GameFactory gameFactory = new GameFactory();
     int currentCell=-1;
@@ -227,12 +228,14 @@ public class MapGameActivity extends ActionBarActivity {
 
     public void onClickStartGame(View view) {
         if(gameFactory.CheckIterate()) {
-             controller.createGame(gameFactory.returnGame());
+            Game graj= gameFactory.returnGame();
+             controller.createGame(graj);
         } else Toast.makeText(this, "ustaw wszystkie statki", Toast.LENGTH_SHORT).show();
 
     }
 
     public void startMapPlayActivity(){
+
         Intent intent = new Intent(this, MapPlayActivity.class);
         startActivity(intent);
 
