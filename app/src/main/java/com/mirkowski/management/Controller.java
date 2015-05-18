@@ -233,14 +233,19 @@ public class Controller {
 
     }
     public void onRequest(String message){
-        response(message,game.opponentShot(Integer.valueOf(message.charAt(0)),Integer.valueOf(message.charAt(0))));
+        String tempX = message.substring(0,1);
+        String tempY = message.substring(1,2);
+        Log.d("Mess",message);
+        Log.d("X",tempX+tempY);
+        Log.d("Shot", ":"+String.valueOf(Integer.valueOf(message.substring(0,1))+Integer.valueOf(message.substring(1, 2))));
+        response(message, game.opponentShot(Integer.valueOf(message.substring(0, 1)),Integer.valueOf(message.substring(1, 2))));
         mapPlayActivity.display(game.getOwner());
         imCurrentPlayer = true;
     }
 
     public void onResponse(String message){
-        game.setShotOpponentMap(Integer.valueOf(message.charAt(0)),Integer.valueOf(message.charAt(1)),Integer.valueOf(message.charAt(2)));
-        mapPlayActivity.display(game.getOwner());
+        game.setShotOpponentMap(Integer.valueOf(message.substring(0, 1)),Integer.valueOf(message.substring(1, 2)),Integer.valueOf(message.substring(2, 3)));
+        mapPlayActivity.display(game.getOpponent());
         imCurrentPlayer = false;
     }
 

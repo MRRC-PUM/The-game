@@ -1,5 +1,7 @@
 package com.example.bartek.shipswar.logic;
 
+import android.util.Log;
+
 /**
  * Created by Bartek on 2015-04-30.
  */
