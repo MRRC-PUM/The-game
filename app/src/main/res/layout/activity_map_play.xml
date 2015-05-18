@@ -11,7 +11,8 @@
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
         android:layout_height="310dp"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        android:id="@+id/relativeLayout">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -1226,7 +1227,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="zamien"
-        android:onClick="onChlickChangeView"/>
+        android:onClick="onChlickChangeView"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
 
 
 

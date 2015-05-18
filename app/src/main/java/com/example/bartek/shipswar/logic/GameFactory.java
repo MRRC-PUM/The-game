@@ -115,11 +115,11 @@ public class GameFactory {
             whose=1;
             Log.d("GameFactory", "poziomy");
             ships[iterate].setOrientation(true);
-        }
+        } else
         if(start.getY() == end.getY()){
             whose=2;Log.d("GameFactory", "pionowy");
             ships[iterate].setOrientation(false);
-        }
+        } else return false;
 
         Log.d("GameFactory", "Sprawdzono ulozenie");
         if(whose!=0){

@@ -15,9 +15,10 @@
         android:layout_height="wrap_content">
 
         <Spinner
-            android:layout_width="292dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner" />
+            android:id="@+id/spinner"
+            android:layout_gravity="left"/>
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -25,7 +26,8 @@
             android:layout_height="wrap_content"
             android:text="R"
             android:id="@+id/ref"
-            android:onClick="expandList"/>
+            android:onClick="expandList"
+            android:layout_gravity="right"/>
     </LinearLayout>
 
     <Button
