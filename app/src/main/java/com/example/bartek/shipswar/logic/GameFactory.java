@@ -53,9 +53,13 @@ public class GameFactory {
                     //poczatek
                     pointsStart = new Points(x,y);
                     pointsSettedPoints++;
+                    Log.d("GameFactory", "podswietlanie pkt w ktory kliknac ");
+                    displayHelps(pointsStart);
 
                 } else {
                     //koniec
+                    Log.d("GameFactory","Clear help");
+                    clearhelp(pointsStart);
                     pointsEnd = new Points(x,y);
                     pointsSettedPoints++;
                     Log.d("GameFactory", "Wielomasztowiec Stawiam drugi punkt");
@@ -65,7 +69,7 @@ public class GameFactory {
                             setOnLineInOwner(pointsStart, pointsEnd);
                             comunicate="";
                         } else iterate+=1;
-                    }
+                    } else iterate++;
 
 
                     iterate--;
@@ -119,7 +123,9 @@ public class GameFactory {
         if(start.getY() == end.getY()){
             whose=2;Log.d("GameFactory", "pionowy");
             ships[iterate].setOrientation(false);
-        } else return false;
+        } else if ((start.getX() != end.getX())||(start.getY() != end.getY())){
+
+            return false;}
 
         Log.d("GameFactory", "Sprawdzono ulozenie");
         if(whose!=0){
@@ -133,7 +139,7 @@ public class GameFactory {
                 if(((end.getY()-start.getY())+1)==ships[iterate].getPoints()){
                     Log.d("GameFactory", "Poprawnie ustawiono1");
                     return true;
-                } else{ Log.d("GameFactory", "bledni ustawiono1");iterate++;return false;}
+                } else{ Log.d("GameFactory", "bledni ustawiono1");/*iterate++;*/return false;}
             }
             if(whose==2){
                 if(start.getX() > end.getX()){
@@ -143,7 +149,7 @@ public class GameFactory {
                 }
                 if(((end.getX()-start.getX())+1)==ships[iterate].getPoints()){
                     Log.d("GameFactory", "Poprawnie ustawiono2"); return true;
-                }else {Log.d("GameFactory", "bledni ustawiono2");iterate++;return false;}
+                }else {Log.d("GameFactory", "bledni ustawiono2");/*iterate++;*/return false;}
             }
         } else return false;//jesli nie jest ani poziomo ani pionowo
 
@@ -163,9 +169,9 @@ public class GameFactory {
 
         for (int i =local.getX(); i<=local.getY();i++){
             if (ships[iterate].getOrientation()) {
-                if(owner[constatns][i]==1 || owner[constatns][i]==2){ iterate++;return false;}
+                if(owner[constatns][i]==1 || owner[constatns][i]==2){ return false;}
             } else {
-                if(owner[i][constatns]==1 || owner[i][constatns]==2) {iterate++; return false;}
+                if(owner[i][constatns]==1 || owner[i][constatns]==2) { return false;}
             }
         }
 
@@ -252,6 +258,76 @@ public class GameFactory {
 
     public String getComunicate(){
         return this.comunicate;
+    }
+
+    private void displayHelps(Points pointStart) {
+        boolean is=false;
+      //ustawianie pomocy w poziomie w lewo
+        for (int i = pointStart.getX(); i>(pointsStart.getX()-(ships[iterate].getPoints()-1)); i--){
+            if ((i<0) || (owner[i][pointsStart.getY()]==1) || (owner[i][pointsStart.getY()]==2)) {
+                is = false;
+                break;
+            } else is = true;
+
+        }
+
+        if (is) {
+            int x_local = (pointsStart.getX()-(ships[iterate].getPoints()-1));
+            if ((x_local>=0) && (owner[x_local][pointsStart.getY()]==0)) owner[x_local][pointsStart.getY()]=55;
+        }
+
+        //istawianie pomocy w poziomie w prawo
+        is=false;
+        for (int i = pointStart.getX(); i<(pointsStart.getX()+(ships[iterate].getPoints()-1)); i++){
+            if ((i>9)  || (owner[i][pointsStart.getY()]==1) || (owner[i][pointsStart.getY()]==2)) {
+                is = false;
+                break;
+            } else is = true;
+
+        }
+
+        if (is) {
+            int x_local = (pointsStart.getX()+(ships[iterate].getPoints()-1));
+            if ((x_local<=9)&& (owner[x_local][pointsStart.getY()]==0)) owner[x_local][pointsStart.getY()]=55;
+        }
+
+        //pion w dol
+        is=false;
+        for (int i = pointStart.getY(); i<(pointsStart.getY()+(ships[iterate].getPoints()-1)); i++){
+            if ((i>9)  || (owner[pointsStart.getX()][i]==1) || (owner[pointsStart.getX()][i]==2)) {
+                is = false;
+                break;
+            } else is = true;
+
+        }
+
+        if (is) {
+            int y_local = (pointsStart.getY()+(ships[iterate].getPoints()-1));
+            if ((y_local<=9)&& (owner[pointsStart.getX()][y_local]==0)) owner[pointsStart.getX()][y_local]=55;
+        }
+
+        //w gore
+        is =false;
+        for (int i = pointStart.getY(); i>(pointsStart.getY()-(ships[iterate].getPoints()-1)); i--){
+            if ((i<0) || (owner[pointsStart.getX()][i]==1) || (owner[pointsStart.getX()][i]==2)) {
+                is = false;
+                break;
+            } else is = true;
+
+        }
+
+        if (is) {
+            int y_local = (pointsStart.getY()-(ships[iterate].getPoints()-1));
+            if ((y_local>=0) && (owner[pointsStart.getX()][y_local]==0)) owner[pointsStart.getX()][y_local]=55;
+        }
+
+    }
+
+    private void clearhelp(Points pointStart){
+        for (int i = 0; i<owner.length; i++)
+            for (int j = 0; j<owner.length; j++) {
+                           if(owner[j][i]==55)owner[j][i]=0;
+            }
     }
 
 }

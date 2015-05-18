@@ -215,6 +215,7 @@ public class MapGameActivity extends Activity {
                 if (tab[j][i]==0) pole.setBackgroundColor(0xff000000+(j+i)<<4); // czarny to bedzie jak beda grafiki... pole.setImageBitmap(Bitmap bm);
                 else if (tab[j][i]==1) pole.setBackgroundColor(0xff0000ff);//niebieski gdy obok statku
                 else if (tab[j][i]==2) pole.setBackgroundColor(0xffff0000);// czerwony gdy statek\
+                else if (tab[j][i]==55) pole.setBackgroundColor(0xffffff00);
 
             }
         TextView ShipTextView = (TextView) findViewById(R.id.ShipsTextView);
