@@ -238,7 +238,7 @@ public class Controller {
         Log.d("Mess",message);
         Log.d("X",tempX+tempY);
         Log.d("Shot", ":"+String.valueOf(Integer.valueOf(message.substring(0,1))+Integer.valueOf(message.substring(1, 2))));
-        response(message, game.opponentShot(Integer.valueOf(message.substring(0, 1)),Integer.valueOf(message.substring(1, 2))));
+        response(message, game.opponentShot(Integer.valueOf(message.substring(0, 1)), Integer.valueOf(message.substring(1, 2))));
         mapPlayActivity.display(game.getOwner());
         imCurrentPlayer = true;
     }
@@ -262,7 +262,10 @@ public class Controller {
     }
 
     public void ready(){
-        if(isOpponentReady)startTheGame();
+        if(isOpponentReady){
+            startTheGame();
+            connectionManager.sendMessage(new Message(settings.getUserName(), opponentName, GameCommand.Ready.toString(), settings.getUserName()));
+        }
         else {
             isReady = true;
             connectionManager.sendMessage(new Message(settings.getUserName(),opponentName, GameCommand.Ready.toString(),settings.getUserName()));
