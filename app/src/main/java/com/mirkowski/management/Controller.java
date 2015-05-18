@@ -4,6 +4,7 @@ package com.mirkowski.management;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.bartek.shipswar.ChoseConnectionTypeActivity;
 import com.example.bartek.shipswar.MainActivity;
 import com.example.bartek.shipswar.MapGameActivity;
 import com.example.bartek.shipswar.MapPlayActivity;
@@ -42,6 +43,8 @@ public class Controller {
        private StatisticsActivity statisticsActivity = null;
        private MapGameActivity mapGameActivity = null;
        private MapPlayActivity mapPlayActivity = null;
+       private ChoseConnectionTypeActivity choseConnectionTypeActivity = null;
+
     //-------------------------------
 
 
@@ -63,6 +66,10 @@ public class Controller {
 
     public void setMapPlayActivity(MapPlayActivity mapPlayActivity){
         this.mapPlayActivity = mapPlayActivity;
+    }
+
+    public void setChoseConnectionTypeActivity(ChoseConnectionTypeActivity choseConnectionTypeActivity) {
+        this.choseConnectionTypeActivity = choseConnectionTypeActivity;
     }
     
     public Controller(MainActivity mainActivity){
@@ -177,13 +184,19 @@ public class Controller {
         }
     }
 
-    private void destroy(SystemCommand result){
+    public void destroy(SystemCommand result){
         game = null;
         opponentName = null;
         isOpponentReady = false;
         isReady = false;
         isEnableGmae = false;
         imCurrentPlayer = false;
+        mapPlayActivity.destroy();
+        mapGameActivity.destroy();
+        roomGameActivity.destroy();
+        choseConnectionTypeActivity.destroy();
+
+
     }
 
     // metoda wywo�ywana przy zgodzie obu graczy na gre
@@ -205,14 +218,19 @@ public class Controller {
     public void endTheGame(SystemCommand result){
         switch (result){
             case Error:
+                mapPlayActivity.showDialoger(SystemCommand.Error);
                 destroy(SystemCommand.Error);
                 break;
             case Win:
-                destroy(SystemCommand.Win);
+                //stworz z parame
+               // mapGameActivity.showDialoger
+                mapPlayActivity.showDialoger(SystemCommand.Win);
+              //  destroy(SystemCommand.Win);
                 settings.incrementWinCount();
                 break;
             case Defeat:
-                destroy(SystemCommand.Defeat);
+               // destroy(SystemCommand.Defeat);
+                mapPlayActivity.showDialoger(SystemCommand.Defeat);
                 settings.incrementDefeatCount();
                 break;
             default:
@@ -241,12 +259,16 @@ public class Controller {
         response(message, game.opponentShot(Integer.valueOf(message.substring(0, 1)), Integer.valueOf(message.substring(1, 2))));
         mapPlayActivity.display(game.getOwner());
         imCurrentPlayer = true;
+        if(game.getOwnerPoints()==0) {
+           connectionManager.close();
+        }
     }
 
     public void onResponse(String message){
         game.setShotOpponentMap(Integer.valueOf(message.substring(0, 1)),Integer.valueOf(message.substring(1, 2)),Integer.valueOf(message.substring(2, 3)));
         mapPlayActivity.display(game.getOpponent());
         imCurrentPlayer = false;
+
     }
 
     public void request(String coordinates){
@@ -306,6 +328,9 @@ public class Controller {
     public String getDefeatCount() {
                 return settings.getDefeatCount();
             }
+
+
+
 
 }
 

@@ -50,8 +50,8 @@ public class MainActivity extends Activity {
     }
 
     public void onClickButtonGraj(View view) {
-        //Intent intent = new Intent(this, MapGameActivity.class);
-        Intent intent = new Intent(this, ChoseConnectionTypeActivity.class);
+        Intent intent = new Intent(this, MapPlayActivity.class);
+        //Intent intent = new Intent(this, ChoseConnectionTypeActivity.class);
         startActivity(intent);
     }
 

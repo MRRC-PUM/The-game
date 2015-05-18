@@ -71,7 +71,7 @@ public class Game {
     }
 
     public boolean opponentShot (int x, int y) {
-        if (owner[x][y]==2) { owner[x][y] = SHOT; return true;}
+        if (owner[x][y]==2) { owner[x][y] = SHOT; ownerPoints--; return true;}
         else {owner[x][y] = LOSE; return false;}
     }
 }

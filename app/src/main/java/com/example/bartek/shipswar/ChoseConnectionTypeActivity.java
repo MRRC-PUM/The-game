@@ -19,6 +19,8 @@ public class ChoseConnectionTypeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chose_connection_type);
         controller = MainActivity.controller;
+        controller.setChoseConnectionTypeActivity(this);
+
     }
 
 
@@ -55,5 +57,8 @@ public class ChoseConnectionTypeActivity extends Activity {
 //        controller.setConnectionManager(ConnectionType.Bluetooth);
 //        Intent intent = new Intent(this, RoomGameActivity.class);
 //        startActivity(intent);
+    }
+    public void destroy() {
+        onDestroy();
     }
 }

@@ -1,14 +1,17 @@
 package com.example.bartek.shipswar;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mirkowski.management.Controller;
+import com.mirkowski.management.command.SystemCommand;
 
 
 public class MapPlayActivity extends Activity {
@@ -185,7 +188,7 @@ public class MapPlayActivity extends Activity {
             controller.request(""+x+""+y);
 
 
-        }
+        } else Toast.makeText(this, "Nie twoj ruch!!!!", Toast.LENGTH_SHORT).show();
 
 
     }
@@ -199,13 +202,38 @@ public class MapPlayActivity extends Activity {
         if(wchose_tab/2==0)
         display(controller.getGame().getOwner());
         else display(controller.getGame().getOpponent());
+
+        TextView textView = (TextView) findViewById(R.id.currentPlayerTextView);
+        if (controller.isImCurrentPlayer())
+        textView.setText("Twoja tura");
+        else textView.setText("tura przeciwnika");
     }
 
-    public void onChlicChangeView(View view) {
+    public void onChlickChangeView(View view) {
         wchose_tab++;
         if(wchose_tab/2==0)
             display(controller.getGame().getOwner());
         else display(controller.getGame().getOpponent());
 
     }
+
+
+
+   public void destroy() {
+       onDestroy();
+   }
+
+
+    public void showDialoger(SystemCommand result){
+        FragmentManager manager = getFragmentManager();
+
+        EndingFragment invet = new EndingFragment();
+        invet.setInfo(result);
+        invet.setController(controller);
+        invet.show(manager, "EndingFragment");
+
+    }
+
+
+
 }

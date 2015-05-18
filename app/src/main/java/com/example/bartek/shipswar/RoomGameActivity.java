@@ -146,4 +146,11 @@ public class RoomGameActivity extends Activity {
         invet.setController(controller);
         invet.show(manager, "WantPlayFragment");
     }
+
+    public void destroy() {
+        onDestroy();
+    }
+
+
+
 }

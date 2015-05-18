@@ -241,4 +241,7 @@ public class MapGameActivity extends Activity {
         startActivity(intent);
 
     }
+    public void destroy() {
+        onDestroy();
+    }
 }
