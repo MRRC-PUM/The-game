@@ -119,6 +119,7 @@ public class Controller {
     public void inviteToGame(String playerName){
         opponentName = playerName;
         connectionManager.sendMessage(new Message(settings.getUserName(),"System",SystemCommand.StartGameRequest.toString(),playerName));
+        imCurrentPlayer=true;
     }
     // metoda do odpowiedzi na zaproszenie
     public void responseOnInviteToGame(boolean isAgree,String playerName){
@@ -191,10 +192,8 @@ public class Controller {
         isReady = false;
         isEnableGmae = false;
         imCurrentPlayer = false;
-        mapPlayActivity.destroy();
-        mapGameActivity.destroy();
-        roomGameActivity.destroy();
-        choseConnectionTypeActivity.destroy();
+
+       mainActivity.backof();
 
 
     }
@@ -259,7 +258,7 @@ public class Controller {
         response(message, game.opponentShot(Integer.valueOf(message.substring(0, 1)), Integer.valueOf(message.substring(1, 2))));
         mapPlayActivity.display(game.getOwner());
         imCurrentPlayer = true;
-        if(game.getOwnerPoints()==0) {
+        if(game.getOwnerPoints()==1) {
            connectionManager.close();
         }
     }
@@ -281,6 +280,7 @@ public class Controller {
             else coordinates += "0";
             connectionManager.sendMessage(new Message(settings.getUserName(),opponentName, GameCommand.GameResponse.toString(),coordinates));
         }
+
     }
 
     public void ready(){
@@ -329,9 +329,9 @@ public class Controller {
                 return settings.getDefeatCount();
             }
 
-
-
-
+    public MapPlayActivity getMapPlayActivity() {
+        return mapPlayActivity;
+    }
 }
 
 

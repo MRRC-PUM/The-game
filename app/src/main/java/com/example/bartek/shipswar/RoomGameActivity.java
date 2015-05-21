@@ -147,8 +147,17 @@ public class RoomGameActivity extends Activity {
         invet.show(manager, "WantPlayFragment");
     }
 
+
+    public void showDialog2(){
+        FragmentManager manager = getFragmentManager();
+
+        EndingFragment invet = new EndingFragment();
+
+        invet.setController(controller);
+        invet.show(manager, "EndingFragment");
+    }
     public void destroy() {
-        onDestroy();
+        super.onDestroy();
     }
 
 

@@ -2,6 +2,7 @@ package com.example.bartek.shipswar;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -31,7 +32,8 @@ public class EndingFragment extends DialogFragment implements View.OnClickListen
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-       View view = inflater.inflate(R.layout.fragment_want_play, null);
+       View view = inflater.inflate(R.layout.fragment_ending, null);
+
         ok = (Button) view.findViewById(R.id.OK);
         ok.setOnClickListener(this);
 
@@ -54,9 +56,9 @@ public class EndingFragment extends DialogFragment implements View.OnClickListen
         if(v.getId() == R.id.OK) {
 
             controller.destroy(this.info);
+            controller.getMapPlayActivity().bMain();
 
-
-            dismiss();
+            EndingFragment.this.dismiss();
         }
     }
 

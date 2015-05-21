@@ -2,6 +2,7 @@ package com.example.bartek.shipswar;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -234,6 +235,12 @@ public class MapPlayActivity extends Activity {
 
     }
 
+    public void bMain(){
+        Intent returnBtn = new Intent(getApplicationContext(),
+                MainActivity.class);
+
+        startActivity(returnBtn);
+    }
 
 
 }

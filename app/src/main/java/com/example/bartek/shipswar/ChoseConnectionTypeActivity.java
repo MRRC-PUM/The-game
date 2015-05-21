@@ -61,4 +61,7 @@ public class ChoseConnectionTypeActivity extends Activity {
     public void destroy() {
         onDestroy();
     }
+    public void backof(){
+        onResume();
+    }
 }
