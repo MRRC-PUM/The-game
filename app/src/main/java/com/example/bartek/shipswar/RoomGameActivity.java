@@ -88,21 +88,28 @@ public class RoomGameActivity extends Activity {
 
     ///po rozmowie
     public void setPlayersList(List list_get){
+        try {
         spinner = (Spinner) findViewById(R.id.spinner);
         List<String> list = list_get;
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        try {
+
             spinner.setAdapter(dataAdapter);
-        }catch (Exception e){}
+        }catch (NullPointerException npe){
+            controller.getPlayersList();
+        }catch (Exception e){ }
 
     }
 
     //Kamil zamienilem to tak jak napisalem w documencie na stronie
     private String getSelectedPlayer(){
-        spinner = (Spinner) findViewById(R.id.spinner);
-        return String.valueOf(spinner.getSelectedItem());
+        try {
+            spinner = (Spinner) findViewById(R.id.spinner);
+            return String.valueOf(spinner.getSelectedItem());
+        }catch (NullPointerException npe){
+            return null;
+        }
     }
 
     public void invite(){
