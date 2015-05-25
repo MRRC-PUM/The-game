@@ -56,6 +56,8 @@ public class EndingFragment extends DialogFragment implements View.OnClickListen
         if(v.getId() == R.id.OK) {
 
             controller.destroy(this.info);
+            controller.disconnect();
+            controller.setConnectionManager(null);
             controller.getMapPlayActivity().bMain();
 
             EndingFragment.this.dismiss();

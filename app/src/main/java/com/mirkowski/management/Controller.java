@@ -340,7 +340,9 @@ public class Controller {
 
 
 
-
+    public void disconnect(){
+        connectionManager.disconnect();
+    }
 }
 
 
