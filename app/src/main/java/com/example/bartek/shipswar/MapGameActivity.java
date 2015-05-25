@@ -244,4 +244,5 @@ public class MapGameActivity extends Activity {
     public void destroy() {
         onDestroy();
     }
+
 }

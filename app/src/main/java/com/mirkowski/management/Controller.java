@@ -71,7 +71,11 @@ public class Controller {
     public void setChoseConnectionTypeActivity(ChoseConnectionTypeActivity choseConnectionTypeActivity) {
         this.choseConnectionTypeActivity = choseConnectionTypeActivity;
     }
-    
+
+    public MapPlayActivity getMapPlayActivity() {
+        return mapPlayActivity;
+    }
+
     public Controller(MainActivity mainActivity){
         this.mainActivity = mainActivity;
         settings = new Settings(mainActivity.getSharedPreferences());
@@ -86,6 +90,10 @@ public class Controller {
                 // nizioł
                 break;
         }
+    }
+
+    public ConnectionManager getConnectionManager() {
+        return connectionManager;
     }
 
     public void setOpponentName(String opponentName) {
@@ -119,7 +127,6 @@ public class Controller {
     public void inviteToGame(String playerName){
         opponentName = playerName;
         connectionManager.sendMessage(new Message(settings.getUserName(),"System",SystemCommand.StartGameRequest.toString(),playerName));
-        imCurrentPlayer=true;
     }
     // metoda do odpowiedzi na zaproszenie
     public void responseOnInviteToGame(boolean isAgree,String playerName){
@@ -192,8 +199,10 @@ public class Controller {
         isReady = false;
         isEnableGmae = false;
         imCurrentPlayer = false;
-
-       mainActivity.backof();
+        mapPlayActivity.destroy();
+        mapGameActivity.destroy();
+        roomGameActivity.destroy();
+        choseConnectionTypeActivity.destroy();
 
 
     }
@@ -280,7 +289,6 @@ public class Controller {
             else coordinates += "0";
             connectionManager.sendMessage(new Message(settings.getUserName(),opponentName, GameCommand.GameResponse.toString(),coordinates));
         }
-
     }
 
     public void ready(){
@@ -329,9 +337,9 @@ public class Controller {
                 return settings.getDefeatCount();
             }
 
-    public MapPlayActivity getMapPlayActivity() {
-        return mapPlayActivity;
-    }
+
+
+
 }
 
 

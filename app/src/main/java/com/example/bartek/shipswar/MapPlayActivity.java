@@ -211,10 +211,12 @@ public class MapPlayActivity extends Activity {
     }
 
     public void onChlickChangeView(View view) {
-        wchose_tab++;
-        if(wchose_tab/2==0)
-            display(controller.getGame().getOwner());
-        else display(controller.getGame().getOpponent());
+        try {
+            wchose_tab++;
+            if (wchose_tab % 2 == 0)
+                display(controller.getGame().getOwner());
+            else display(controller.getGame().getOpponent());
+        }catch (Exception w){w.printStackTrace();}
 
     }
 

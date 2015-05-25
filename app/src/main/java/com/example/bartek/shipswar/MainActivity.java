@@ -1,7 +1,6 @@
 package com.example.bartek.shipswar;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -51,7 +50,6 @@ public class MainActivity extends Activity {
     }
 
     public void onClickButtonGraj(View view) {
-        //Intent intent = new Intent(this, MapPlayActivity.class);
         Intent intent = new Intent(this, ChoseConnectionTypeActivity.class);
         startActivity(intent);
     }
@@ -68,10 +66,6 @@ public class MainActivity extends Activity {
 
     public void onClickButtonWyjscie(View view) {
         System.exit(0);
-    }
-
-    public void backof(){
-        onResume();
     }
 
 }

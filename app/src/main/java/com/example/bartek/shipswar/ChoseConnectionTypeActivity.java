@@ -47,7 +47,7 @@ public class ChoseConnectionTypeActivity extends Activity {
     }
 
     public void onClickConnectionViaInternet(View view) {
-        controller.setConnectionManager(ConnectionType.Internet);
+        if(controller.getConnectionManager() == null )controller.setConnectionManager(ConnectionType.Internet);
         Intent intent = new Intent(this, RoomGameActivity.class);
         startActivity(intent);
     }
