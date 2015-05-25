@@ -32,7 +32,7 @@ public class Settings {
     public Settings(){
 
         userName =  "Player";
-        serverAdress = "192.168.2.100";
+        serverAdress = "37.59.122.123";
         winCount =  0;
         defeatCount = 0;
     }
@@ -41,7 +41,7 @@ public class Settings {
         sharedEditor = this.sharedPreferences.edit();
 
         userName = sharedPreferences.getString("UserName", "Player");
-        serverAdress = sharedPreferences.getString("ServerAdress","192.168.2.100");
+        serverAdress = sharedPreferences.getString("ServerAdress","37.59.122.123");
         winCount = sharedPreferences.getInt("WinCount", 0);
         defeatCount = sharedPreferences.getInt("DefeatCount",0);
     }
