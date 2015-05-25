@@ -127,6 +127,7 @@ public class Controller {
     public void inviteToGame(String playerName){
         opponentName = playerName;
         connectionManager.sendMessage(new Message(settings.getUserName(),"System",SystemCommand.StartGameRequest.toString(),playerName));
+        imCurrentPlayer = true;
     }
     // metoda do odpowiedzi na zaproszenie
     public void responseOnInviteToGame(boolean isAgree,String playerName){
