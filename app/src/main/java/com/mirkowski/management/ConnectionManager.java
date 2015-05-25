@@ -35,7 +35,7 @@ public class ConnectionManager {
     }
 
     public ArrayList<String> getPlayerList() {
-        if(playerList == null)getPlayersListfromServer("");
+        getPlayersListfromServer("");
         return playerList;
     }
 
