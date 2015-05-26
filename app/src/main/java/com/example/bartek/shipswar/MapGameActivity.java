@@ -30,7 +30,7 @@ public class MapGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_game);
         controller = MainActivity.controller;
-        controller.setMapGameActivity(this);
+        controller.setMapGameActivity(this); // null
 
 
         buttons = (Button) findViewById(R.id.startgame);

@@ -82,13 +82,17 @@ public class Controller {
     }
 
     public void setConnectionManager(ConnectionType connectionType) {
-        switch (connectionType) {
-            case Internet:
-                this.connectionManager = new ConnectionManager(this,new WebSocketConnector(settings.getServerAdress()),settings.getUserName());
-                break;
-            case Bluetooth:
-                // nizioł
-                break;
+        try {
+            switch (connectionType) {// err null
+                case Internet:
+                    this.connectionManager = new ConnectionManager(this, new WebSocketConnector(settings.getServerAdress()), settings.getUserName());
+                    break;
+                case Bluetooth:
+                    // nizioł
+                    break;
+            }
+        }catch (NullPointerException npe){
+            connectionManager = null;
         }
     }
 
