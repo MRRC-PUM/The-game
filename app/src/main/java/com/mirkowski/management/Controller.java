@@ -206,10 +206,17 @@ public class Controller {
         isEnableGmae = false;
         imCurrentPlayer = false;
         //mainActivity.backof();
-        if (mapPlayActivity!=null)mapPlayActivity.destroy();
-        if (mapGameActivity!=null)mapGameActivity.destroy();
-        if (roomGameActivity!=null)roomGameActivity.destroy();
-        if (choseConnectionTypeActivity!=null)choseConnectionTypeActivity.destroy();
+        if (mapPlayActivity!=null) mapPlayActivity.destroy();
+        if (mapGameActivity!=null){
+            mapGameActivity.destroy();
+            mapGameActivity.bMain();
+        }
+        if (roomGameActivity!=null){
+            roomGameActivity.destroy();
+            roomGameActivity.bMain();
+        }
+        if (choseConnectionTypeActivity!=null) choseConnectionTypeActivity.destroy();
+
 
 
     }
@@ -244,8 +251,8 @@ public class Controller {
                 settings.incrementWinCount();
                 break;
             case Defeat:
-                destroy(SystemCommand.Defeat);
                 if (mapPlayActivity!=null) mapPlayActivity.showDialoger(SystemCommand.Defeat);
+                destroy(SystemCommand.Defeat);
                 settings.incrementDefeatCount();
                 break;
             default:
