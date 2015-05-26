@@ -169,11 +169,17 @@ public class RoomGameActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        controller.destroy();
+
         controller.disconnect();
         controller.setConnectionManager(null); // null
-        controller.getMapPlayActivity().bMain();
+        controller.getRoomGameActivity().bMain();
 
+    }
+    public void bMain(){
+        Intent returnBtn = new Intent(getApplicationContext(),
+                MainActivity.class);
+
+        startActivity(returnBtn);
     }
 
 }

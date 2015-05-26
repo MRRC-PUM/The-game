@@ -1,6 +1,7 @@
 package com.mirkowski.management;
 
 
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -244,7 +245,7 @@ public class Controller {
                 break;
             case Defeat:
                // destroy(SystemCommand.Defeat);
-                mapPlayActivity.showDialoger(SystemCommand.Defeat);
+                if (mapPlayActivity!=null) mapPlayActivity.showDialoger(SystemCommand.Defeat);
                 settings.incrementDefeatCount();
                 break;
             default:
@@ -348,6 +349,16 @@ public class Controller {
     public void disconnect(){
         connectionManager.disconnect();
     }
+
+    public MapGameActivity getMapGameActivity() {
+        return mapGameActivity;
+    }
+
+    public RoomGameActivity getRoomGameActivity() {
+        return roomGameActivity;
+    }
+
+
 }
 
 
