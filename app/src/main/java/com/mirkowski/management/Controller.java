@@ -200,7 +200,7 @@ public class Controller {
         isReady = false;
         isEnableGmae = false;
         imCurrentPlayer = false;
-        mainActivity.backof();
+        //mainActivity.backof();
         mapPlayActivity.destroy();
         mapGameActivity.destroy();
         roomGameActivity.destroy();
