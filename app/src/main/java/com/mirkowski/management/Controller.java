@@ -233,18 +233,18 @@ public class Controller {
     public void endTheGame(SystemCommand result){
         switch (result){
             case Error:
-                mapPlayActivity.showDialoger(SystemCommand.Error);
+                if (mapPlayActivity!=null) mapPlayActivity.showDialoger(SystemCommand.Error);
                 destroy(SystemCommand.Error);
                 break;
             case Win:
                 //stworz z parame
                // mapGameActivity.showDialoger
-                mapPlayActivity.showDialoger(SystemCommand.Win);
-              //  destroy(SystemCommand.Win);
+                if (mapPlayActivity!=null) mapPlayActivity.showDialoger(SystemCommand.Win);
+                destroy(SystemCommand.Win);
                 settings.incrementWinCount();
                 break;
             case Defeat:
-               // destroy(SystemCommand.Defeat);
+                destroy(SystemCommand.Defeat);
                 if (mapPlayActivity!=null) mapPlayActivity.showDialoger(SystemCommand.Defeat);
                 settings.incrementDefeatCount();
                 break;
