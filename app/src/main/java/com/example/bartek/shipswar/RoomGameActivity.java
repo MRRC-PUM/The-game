@@ -173,6 +173,7 @@ public class RoomGameActivity extends Activity {
         controller.disconnect();
         controller.setConnectionManager(null); // null
         controller.getMapPlayActivity().bMain();
+
     }
 
 }
