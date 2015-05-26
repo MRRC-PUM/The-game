@@ -68,4 +68,8 @@ public class MainActivity extends Activity {
         System.exit(0);
     }
 
+    public void backof(){
+                onResume();
+            }
+
 }
