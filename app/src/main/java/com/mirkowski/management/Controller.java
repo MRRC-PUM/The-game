@@ -206,10 +206,10 @@ public class Controller {
         isEnableGmae = false;
         imCurrentPlayer = false;
         //mainActivity.backof();
-        mapPlayActivity.destroy();
-        mapGameActivity.destroy();
-        roomGameActivity.destroy();
-        choseConnectionTypeActivity.destroy();
+        if (mapPlayActivity!=null)mapPlayActivity.destroy();
+        if (mapGameActivity!=null)mapGameActivity.destroy();
+        if (roomGameActivity!=null)roomGameActivity.destroy();
+        if (choseConnectionTypeActivity!=null)choseConnectionTypeActivity.destroy();
 
 
     }
