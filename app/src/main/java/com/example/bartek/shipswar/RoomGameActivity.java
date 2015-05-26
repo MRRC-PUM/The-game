@@ -167,6 +167,12 @@ public class RoomGameActivity extends Activity {
         super.onDestroy();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        controller.destroy();
+        controller.disconnect();
+        controller.setConnectionManager(null); // null
+        controller.getMapPlayActivity().bMain();
+    }
 
 }
