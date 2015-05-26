@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.bartek.shipswar.logic.Game;
 import com.example.bartek.shipswar.logic.GameFactory;
 import com.mirkowski.management.Controller;
+import com.mirkowski.management.command.SystemCommand;
 
 
 public class MapGameActivity extends Activity {
@@ -245,4 +246,11 @@ public class MapGameActivity extends Activity {
         onDestroy();
     }
 
+    @Override
+    public void onBackPressed() {
+        controller.destroy();
+        controller.disconnect();
+        controller.setConnectionManager(null); // null
+        controller.getMapPlayActivity().bMain();
+    }
 }

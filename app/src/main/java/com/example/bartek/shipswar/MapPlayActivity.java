@@ -244,5 +244,12 @@ public class MapPlayActivity extends Activity {
         startActivity(returnBtn);
     }
 
+    @Override
+    public void onBackPressed() {
+        controller.destroy();
+        controller.disconnect();
+        controller.setConnectionManager(null); // null
+        controller.getMapPlayActivity().bMain();
+    }
 
 }
