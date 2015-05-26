@@ -206,18 +206,27 @@ public class Controller {
         isEnableGmae = false;
         imCurrentPlayer = false;
         //mainActivity.backof();
+//        if (mapPlayActivity!=null) mapPlayActivity.destroy();
+//        if (mapGameActivity!=null){
+//            mapGameActivity.destroy();
+//            mapGameActivity.bMain();
+//        }
+//        if (roomGameActivity!=null){
+//            roomGameActivity.destroy();
+//            roomGameActivity.bMain();
+//        }
+//        if (choseConnectionTypeActivity!=null) choseConnectionTypeActivity.destroy();
+
         if (mapPlayActivity!=null) mapPlayActivity.destroy();
-        if (mapGameActivity!=null){
-            mapGameActivity.destroy();
-            mapGameActivity.bMain();
-        }
-        if (roomGameActivity!=null){
-            roomGameActivity.destroy();
-            roomGameActivity.bMain();
-        }
-        if (choseConnectionTypeActivity!=null) choseConnectionTypeActivity.destroy();
-
-
+        else
+            if (mapGameActivity!=null){
+                mapGameActivity.destroy();
+                mapGameActivity.bMain();
+            } else
+                if (roomGameActivity!=null){
+                    roomGameActivity.destroy();
+                    roomGameActivity.bMain();
+                }
 
     }
 
