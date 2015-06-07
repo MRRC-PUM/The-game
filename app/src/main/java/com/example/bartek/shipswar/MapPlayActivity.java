@@ -59,11 +59,11 @@ public class MapPlayActivity extends Activity {
             for (int j = 0; j<tab.length; j++) {
                 ImageView pole = (ImageView) findViewById(currentCell+j+10*i);
 
-                if (tab[j][i]==0) pole.setBackgroundColor(0xff000000+(j+i)<<4); // czarny to bedzie jak beda grafiki... pole.setImageBitmap(Bitmap bm);
-                else if (tab[j][i]==1) pole.setBackgroundColor(0xff0000ff);//niebieski gdy obok statku
-                else if (tab[j][i]==2) pole.setBackgroundColor(0xffff0000);// czerwony gdy statek\
-                else if (tab[j][i]==8) pole.setBackgroundColor(0xffAAAA00);//
-                else if (tab[j][i]==9) pole.setBackgroundColor(0xffffFF00);//
+                if (tab[j][i]==0)  pole.setImageResource(R.drawable.sea);//pole.setBackgroundColor(0xff000000+(j+i)<<4); // czarny to bedzie jak beda grafiki... pole.setImageBitmap(Bitmap bm);
+                else if (tab[j][i]==1)  pole.setImageResource(R.drawable.lock);//pole.setBackgroundColor(0xff0000ff);//niebieski gdy obok statku
+                else if (tab[j][i]==2)  pole.setImageResource(R.drawable.ship);//pole.setBackgroundColor(0xffff0000);// czerwony gdy statek\
+                else if (tab[j][i]==8)  pole.setImageResource(R.drawable.lose);//pole.setBackgroundColor(0xffAAAA00);//
+                else if (tab[j][i]==9)  pole.setImageResource(R.drawable.burnt);//pole.setBackgroundColor(0xffffFF00);//
 
             }
 
