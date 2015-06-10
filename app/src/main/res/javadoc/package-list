@@ -1,0 +1,8 @@
+com.example.bartek.shipswar
+com.example.bartek.shipswar.logic
+com.mirkowski.management
+com.mirkowski.management.command
+com.mirkowski.management.connectionType
+com.mirkowski.management.status
+com.mirkowski.settings
+com.mirkowski.websocketclient
